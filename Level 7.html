@@ -122,9 +122,13 @@
                             b.status -= 1;
                             poeng++;
                             if (poeng == brickRowCount * brickColumnCount * 3 - totalPoeng) {
-                                window.location.replace("https://emsaso.github.io/Level%208.html");
                                 ctx.fillText("DU VANT!", 10, 325);
+                                window.setTimeout(function () {
+                                    window.location.replace("https://emsaso.github.io/Level%208.html");
+                                }, 2000);
                                 !mouseMoveHandler(e);
+                                dx = 0;
+                                dy = 0;
                             }
                         }
                     }
