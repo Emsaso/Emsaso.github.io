@@ -14,20 +14,68 @@
             margin: 0;
         }
 
+        p {
+            position: absolute;
+            background: #ffffff;
+            margin-top: 10px;
+            margin-left: 285px;
+            font-size: 22px;
+        }
+
+        input {
+            margin-top: 50px;
+            margin-left: 300px;
+            font-size: 30px;
+        }
+
         canvas {
             background: #95eae9;
             display: block;
             margin: 0 auto;
-            margin-top: 150px;
+            margin-top: 100px;
             border-radius: 10px 10px;
         }
+
+        div {
+            font-family: Sylfaen;
+            color: black;
+            text-decoration: solid;
+            font-size: 30px;
+            margin-left: auto;
+            margin-top: -600px;
+            width: 225px;
+            background: #ffffff;
+            position: absolute relative;
+        }
+
     </style>
 </head>
 <body>
 
+    <p>skriv navnet ditt i feltet under når du er ferdig</p>
+
+    <input id="poengNavn" type="text" onkeydown="if (event.keyCode === 13) add(this);" />
+
     <canvas id="myCanvas" width="480" height="600"></canvas>
 
+    <div id="todo">Laster inn informasjon...</div>
+
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.1/firebase-firestore.js"></script>
     <script>
+        var config = {
+            apiKey: "AIzaSyCg4fc7XeM0gG-0AEoOfHFZTn1FlBixzpM",
+            authDomain: "breakout-44843.firebaseapp.com",
+            databaseURL: "https://breakout-44843.firebaseio.com",
+            projectId: "breakout-44843",
+            storageBucket: "breakout-44843.appspot.com",
+            messagingSenderId: "33174296137"
+        };
+        firebase.initializeApp(config);
+        var db = firebase.firestore();
+        var todoCollection = db.collection('todoItems');
+
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
         var ballRadius = 10;
@@ -47,8 +95,8 @@
         var brickPadding = 10;
         var brickOffsetTop = 30;
         var brickOffsetLeft = 30;
-        var poeng = (brickColumnCount) + (brickRowCount * - 1) - 1;
-        var totalPoeng = (brickColumnCount) + (brickRowCount * - 1) - 1;
+        var poeng = (brickColumnCount) + (brickRowCount * - 1) - 1 + 544;
+        var totalPoeng = (brickColumnCount) + (brickRowCount * - 1) - 1 - 544;
         var poengEn = 1;
         var poengTo = 2;
         var poengTre = 3;
@@ -66,8 +114,29 @@
         for (c = 0; c < brickColumnCount; c++) {
             bricks[c] = [];
             for (r = 0; r < brickRowCount; r++) {
-                bricks[c][r] = { x: 240, y: 550, status: 3};
+                bricks[c][r] = { x: 240, y: 550, status: 3 };
             }
+        }
+
+        todoCollection.orderBy('todoScore', 'desc').limit(15).onSnapshot(
+            function (collectionSnapshot) {
+                let html = '<ul>';
+                collectionSnapshot.forEach(
+                    function (todoItemSnapshot) {
+                        let todoItem = todoItemSnapshot.data();
+                        html += '<li>' + todoItem.todoName + ' ' + todoItem.todoScore + '</li>';
+
+                    });
+                html += '</ul>';
+                document.getElementById('todo').innerHTML = html;
+            });
+
+        function add(inputTag) {
+            let todoItem = {
+                todoName: inputTag.value,
+                todoScore: poeng
+            };
+            todoCollection.add(todoItem);
         }
 
         document.addEventListener("keydown", keyDownHandler, false);
@@ -100,9 +169,6 @@
             }
             else if (e.keyCode == 65) {
                 leftPressed = false;
-            }
-            if (e.keyCode == 82) {
-                location.reload();
             }
         }
         function mouseMoveHandler(e) {
@@ -252,9 +318,8 @@
                     liv--;
                     dy = -dy;
                     if (!liv) {
-                                setTimeout(location.reload.bind(location), 2000);
-                                ctx.fillText("DU TAPTE", -5, 325);
-                                !mouseMoveHandler(e);
+                        ctx.fillText("DU TAPTE", -5, 325);
+                        !mouseMoveHandler(e);
                     }
                     else {
                         x = paddleX + 45;
@@ -279,4 +344,5 @@
     </script>
 
 </body>
+
 </html>
