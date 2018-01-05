@@ -108,7 +108,9 @@
         var level = 9;
         var tink = new Audio("tink.wav");
         var snare = new Audio("snare.wav");
-        var boing = new Audio("boing.ogx")
+        var boing = new Audio("boing.ogx");
+        var gloriousVictory = new Audio("gloriousVictory.mp3");
+        var sadTrombone = new Audio("sadTrombone.mp3");
 
         var bricks = [];
         for (c = 0; c < brickColumnCount; c++) {
@@ -191,6 +193,7 @@
                             poeng++;
                             if (poeng == brickRowCount * brickColumnCount * 3 - totalPoeng) {
                                 ctx.fillText("DU VANT!", 10, 325);
+                                gloriousVictory.play();
                                 window.setTimeout(function () {
                                     window.location.replace("https://emsaso.github.io/Breakout/Level%2010.html");
                                 }, 2000);
@@ -319,6 +322,7 @@
                     dy = -dy;
                     if (!liv) {
                         ctx.fillText("DU TAPTE", -5, 325);
+                        sadTrombone.play();
                         !mouseMoveHandler(e);
                     }
                     else {
