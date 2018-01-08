@@ -323,6 +323,7 @@
             }
             else if (y + dy > canvas.height - (ballRadius * 2)) {
                 if (x > paddleX - ballRadius && x < paddleX + paddleWidth + ballRadius) {
+                    dx = 8 * ((x - (paddleX + paddleWidth / 2)) / paddleWidth);
                     dy = -dy;
                     boing.play();
                 }
