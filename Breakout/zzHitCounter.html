@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        #hitCounter {
+            border: solid 2px black;
+            background: #421;
+            color: #46f;
+            font-size: 17pt;
+            padding: 10px;
+        }
+
+        #threads li img {
+            right: 5px;
+            top: 5px;
+            position: absolute;
+            float: right;
+        }
+
+        #threads li {
+            font-size: 13pt;
+            position: relative;
+            max-width: 400px;
+            height: 150px;
+            text-align: left;
+            background: #ccc;
+            color: black;
+            margin-bottom: 10px;
+            padding: 10px;
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+
+<script src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+<button id="hitCounter">Hit</button>
+<ul id="threads">
+</ul>
+    <script>
+var dbStats =   new Firebase("https://brilliant-fire-863.firebaseio.com/Stats");
+var dbThreads = new Firebase("https://brilliant-fire-863.firebaseio.com/Threads");
+var hits = 0;
+var counterBtn = $("#hitCounter");
+
+/*
+  I apologize about that.
+dbThreads.push({
+  "name":"Example Thread",
+  "content": "hello, world!",
+  "image": "http://placehold.it/150x150.png"
+});
+*/
+
+function setHits() {
+  counterBtn.text("Besøkende: " + hits);
+}
+
+dbStats.on("child_changed",function(e,prev){
+  hits = e.val().Hits;
+  setHits();
+});
+
+dbStats.on("value",function(e){
+  hits = e.val().Hits;
+  setHits();
+});
+
+dbThreads.on("value",function(e){
+  var threads = e.val();
+  for(var key in threads)
+  {
+    var img = $("<img />",{src:threads[key].image});
+    var list = $("<li />",{html:threads[key].name});
+    var contents = $("<p />",{text:threads[key].content});
+    list.appendTo("#threads");
+    contents.appendTo(list);
+    img.appendTo(list);
+    
+  }
+});
+
+counterBtn.on("click",function(e){
+  hits++;
+  dbStats.set({"Hits":hits});
+  setHits();
+});
+    </script>
+</body>
+</html>
