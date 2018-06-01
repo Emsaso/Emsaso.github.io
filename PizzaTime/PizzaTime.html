@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body {
+            background-image: url(https://media.timeout.com/images/100894285/630/472/image.jpg);
+            background-repeat: no-repeat;
+            background-size: 1540px 735px;
+            text-align: center;
+            font-size: 200%;
+        }
+
+        h1 {
+            border: 5px solid hotpink;
+            background: url("Pizzo.jpg") repeat;
+            background-size: 300px 92.5px;
+            color: rebeccapurple;
+            margin-top: 5px;
+            margin-bottom: 16.5px;
+            text-shadow: #000000 3px 3px;
+        }
+
+        button {
+            background: url("Pizzo.jpg") repeat;
+            background-size: 43px 40px;
+            font-weight: bolder;
+            color: hotpink;
+            text-shadow: rebeccapurple 2px 2px;
+            font-size: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="resultat">Pizza?</h1>
+    <h1 class="resultat">Pizza?</h1>
+    <h1 class="resultat">Pizza?</h1>
+    <h1 class="resultat">Pizza?</h1>
+    <h1 class="resultat">Pizza?</h1>
+    <h1 class="resultat">Pizza?</h1>
+
+    <button onclick="pizzaTime()">BUTTON</button>
+
+    <script>
+        var person = ["Emil: ", "HELL: ", "Kvamme: ", "Lill: ", "Sondre: ", "Karlsen: "];
+        var pizzaName = [
+            "01 DEN ENKLE", "02 KVESS", "03 DRØMMEN", "04 PIZZABAKEREN SPESIAL", "05 SNADDER", "06 MIX",
+            "07 MEKSIKANEREN", "08 BIFFEN", "09 DEN MARINERTE", "10 PEPPERSVENNEN", "11 FLAMMEN", "12 TACOKYLLINGEN",
+            "13 KOKKENS KYLLING",
+            "14 KOKKENS FAVORITT", "15 GNISTEN", "16 LUKSUSKYLLING", "17 KYLLINGFARMEN", "18 VEGETARIANEREN", "19 KEBABEN",
+            "20 DRENGEN",
+            "21 MR.X", "22 CHORIZO SPESIAL", "23 DOBBELDEKKER", "24 HEIT KYLLING", "25 CHORIZOEN", "26 TOSPANNET",
+            "27 SQUASHEN", "28 HOTTENTOTTEN",
+            "29 BBQen", "30 GLADFISKEN"
+        ];
+        function pizzaTime() {
+            var resultLines = document.getElementsByClassName("resultat");
+            for (var i = 0; i < resultLines.length; i++) {
+                resultLines[i].innerHTML = person[i] + getRandom();
+            }
+        }
+        function getRandom() {
+            var randomPizza = Math.floor(Math.random() * pizzaName.length);
+            return pizzaName[randomPizza];
+        }
+
+        document.getElementsByClassName("resultat").style.marginLeft = 40 % - document.getElementsByClassName("resultat").length / 2;
+
+    </script>
+</body>
+</html>
