@@ -1,0 +1,17 @@
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bin\Debug\ReverseMap\resources.pri
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bin\Debug\AppxManifest.xml
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bin\Debug\LiarsDiceJavascript.build.appxrecipe
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\LiarsDiceJavascript.jsproj.CoreCompileInputs.cache
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\ResourceHandlingTask.state
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\priconfig.xml
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\priconfig.xml.intermediate
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\layout.resfiles
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\layout.resfiles.intermediate
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\resources.resfiles
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\resources.resfiles.intermediate
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\pri.resfiles
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\pri.resfiles.intermediate
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\qualifiers.txt
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\qualifiers.txt.intermediate
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bld\Debug\ProjectArchitectures.txt

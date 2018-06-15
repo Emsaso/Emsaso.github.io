@@ -1,0 +1,70 @@
+﻿body {
+    background-color: green;
+}
+.gameBoard {
+    background-color: #224422;
+    margin: auto;
+    margin-top: 20px;
+    width: 85%;
+    padding: 15px;
+}
+
+.players {
+    margin: auto;
+    padding-top: 1.9%;
+    padding-bottom: 1.9%;
+    background-color: hotpink;
+    color: blue;
+    font-weight: bolder;
+    display: flex;
+    flex-direction: row;
+}
+.player {
+    width: 100px;
+    margin: auto;
+    text-align: center;
+}
+.row1 {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+.row2 {
+    padding-left: 0%;
+    padding-right: 0%;
+}
+.row3 {
+    padding-left: 0%;
+    padding-right: 0%;
+}
+.row4 {
+    padding-left: 30%;
+    padding-right: 30%;
+}
+
+.boxes {
+    margin: 5px;
+    background-color: rebeccapurple;
+    color: yellow;
+    font-weight: bolder;
+}
+
+.dice {
+    padding: 2px;
+    background-color: brown;
+    color: white;
+    font-weight: bolder;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+#gameStart {
+    text-align: center;
+    margin-left: 40%;
+    margin-right: 40%;
+    color: blue;
+    background-color: lime;
+    font-size: 50px;
+    font-weight: bolder;
+}
