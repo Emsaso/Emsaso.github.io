@@ -15,6 +15,7 @@ newElement.innerHTML = "Player" + i;
 var div = document.createElement("div");
 div.innerHTML = "Emil";
 
+
 function StartGame() {
     for (var i = 0; i < 8; i++) {
         document.getElementsByClassName("player")[i].innerHTML = playerOneName;

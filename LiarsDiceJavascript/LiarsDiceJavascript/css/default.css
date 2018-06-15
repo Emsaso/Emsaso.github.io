@@ -14,13 +14,13 @@
     padding-top: 1.9%;
     padding-bottom: 1.9%;
     background-color: hotpink;
-    color: blue;
+    color: ivory;
     font-weight: bolder;
     display: flex;
     flex-direction: row;
 }
 .player {
-    width: 100px;
+    width: 250px;
     margin: auto;
     text-align: center;
 }
@@ -33,10 +33,16 @@
     padding-right: 0%;
 }
 .row3 {
+    padding-left: 42.5%;
+    padding-right: 42.5%;
+    margin-top: -5%;
+    margin-bottom: -5%;
+}
+.row4 {
     padding-left: 0%;
     padding-right: 0%;
 }
-.row4 {
+.row5 {
     padding-left: 30%;
     padding-right: 30%;
 }
