@@ -1,58 +1,79 @@
 ﻿body {
     background-color: green;
 }
+
 .gameBoard {
     background-color: #224422;
     margin: auto;
-    margin-top: 20px;
-    width: 75%;
-    height: 75%;
+    margin-top: 1%;
+    width: 50%;
     padding: 15px;
 }
 
 .players {
     margin: auto;
+    padding-top: 0.1%;
+    padding-bottom: 0.1%;
     background-color: hotpink;
-    color: blue;
+    color: ivory;
     font-weight: bolder;
     display: flex;
     flex-direction: row;
 }
+
 .player {
-    width: 100px;
+    width: 250px;
     margin: auto;
     text-align: center;
 }
-.row1 {
-    padding-left: 30%;
-    padding-right: 30%;
+
+.player1, .player6 {
+    margin-left: 20%;
 }
+.player8, .player7 {
+    margin-left: 0%;
+}
+
+.player3, .player4 {
+    margin-right: 0%;
+}
+.player2, .player5 {
+    margin-right: 20%;
+}
+
+.row1 {
+    padding-left: 0%;
+    padding-right: 0%;
+}
+
 .row2 {
     padding-left: 0%;
     padding-right: 0%;
 }
+
 .row3 {
     padding-left: 0%;
     padding-right: 0%;
 }
+
 .row4 {
-    padding-left: 30%;
-    padding-right: 30%;
+    padding-left: 0%;
+    padding-right: 0%;
 }
 
 .boxes {
-    margin: 5px;
+    margin: 2%;
     background-color: rebeccapurple;
     color: yellow;
     font-weight: bolder;
 }
 
 .dice {
-    margin: 5px;
+    padding: 2px;
     background-color: brown;
-    color: white;
-    font-weight: bolder;
-    text-align: left;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
 }
 
 #gameStart {
@@ -64,3 +85,12 @@
     font-size: 50px;
     font-weight: bolder;
 }
+
+.ruleInfo {
+    background-color: black;
+    position: absolute;
+    z-index: 1;
+    margin-left: 17%;
+    text-align: center;
+}
+

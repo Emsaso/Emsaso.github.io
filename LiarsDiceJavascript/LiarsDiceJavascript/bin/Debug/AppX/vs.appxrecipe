@@ -38,7 +38,7 @@
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\index.html">
       <PackagePath>index.html</PackagePath>
-      <Modified>2018-06-14T11:35:13.587</Modified>
+      <Modified>2018-06-15T11:24:51.357</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\images\LockScreenLogo.scale-200.png">
       <PackagePath>images\LockScreenLogo.scale-200.png</PackagePath>
@@ -76,11 +76,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\js\main.js">
       <PackagePath>js\main.js</PackagePath>
-      <Modified>2018-06-14T11:50:34.498</Modified>
+      <Modified>2018-06-15T11:11:49.356</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\css\default.css">
       <PackagePath>css\default.css</PackagePath>
-      <Modified>2018-06-14T10:55:59.375</Modified>
+      <Modified>2018-06-15T11:23:28.523</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\LiarsDiceJavascript\LiarsDiceJavascript\bin\Debug\ReverseMap\resources.pri">
       <PackagePath>resources.pri</PackagePath>
