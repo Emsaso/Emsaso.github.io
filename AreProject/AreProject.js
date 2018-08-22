@@ -10,6 +10,7 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
+var firebase = firebase.firestore();
 const settings = { timestampsInSnapshots: true };
 db.settings(settings);
 var databaseId;
