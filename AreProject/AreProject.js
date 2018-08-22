@@ -17,4 +17,5 @@ var databaseId;
 
 var mainDiv = document.createElement(`mainDiv`);
 mainDiv.innerHTML = "Apekatt";
+document.body.appendChild(mainDiv);
 
