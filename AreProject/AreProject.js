@@ -1,4 +1,3 @@
-<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
 
 // Initialize Firebase
 var config = {
