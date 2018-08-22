@@ -15,7 +15,7 @@ db.settings(settings);
 var databaseId;
 
 
-var mainDiv = document.createElement(`mainDiv`);
-mainDiv.innerHTML = "Apekatt";
-document.body.appendChild(mainDiv);
+var apekatt = document.createElement(`MonkeyCat`);
+apekatt.innerHTML = "Apekatt";
+document.getElementById("mainDiv").appendChild(apekatt);
 
