@@ -10,4 +10,13 @@ var config = {
     messagingSenderId: "1065419366338"
 };
 firebase.initializeApp(config);
+var db = firebase.firestore();
+const settings = { timestampsInSnapshots: true };
+db.settings(settings);
+var databaseId;
+
+
+var divElement = document.createElement("div");
+divElement.innerHTML = "Apekatt";
+document.body.appendChild(div);
 
