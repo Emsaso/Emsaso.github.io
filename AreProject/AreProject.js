@@ -16,7 +16,7 @@ db.settings(settings);
 var databaseId;
 
 
-var divElement = document.createElement("div");
-divElement.innerHTML = "Apekatt";
-document.body.appendChild(divElement);
+var div = document.createElement(`div`);
+div.innerHTML = "Apekatt";
+document.body.appendChild(div);
 
