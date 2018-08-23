@@ -80,10 +80,40 @@ document.body.appendChild(mainDiv);
 var backgroundDiv = document.createElement(`div`);
 backgroundDiv.id = "backgroundDiv";
 backgroundDiv.style.margin = "0";
-backgroundDiv.style.padding = "0 0 45vh";
+backgroundDiv.style.paddingBottom = "45vh";
 backgroundDiv.style.background = "#bbbbbb";
 backgroundDiv.style.textAlign = "center";
 document.getElementById("mainDiv").appendChild(backgroundDiv);
+
+var firebaseCreateUserButton = document.createElement(`button`);
+firebaseCreateUserButton.innerHTML = "Create user";
+firebaseCreateUserButton.id = "createUserButton";
+firebaseCreateUserButton.style.cssFloat = "right";
+firebaseCreateUserButton.style.marginTop = "0.5vh";
+firebaseCreateUserButton.style.marginRight = "0.5vw";
+firebaseCreateUserButton.style.fontSize = "1.4vw";
+firebaseCreateUserButton.onclick = createUserInFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseCreateUserButton);
+
+var firebaseLogOutButton = document.createElement(`button`);
+firebaseLogOutButton.innerHTML = "Log out ";
+firebaseLogOutButton.id = "logOutInput";
+firebaseLogOutButton.style.cssFloat = "right";
+firebaseLogOutButton.style.marginTop = "0.5vh";
+firebaseLogOutButton.style.marginRight = "0.5vw";
+firebaseLogOutButton.style.fontSize = "1.4vw";
+firebaseLogOutButton.onclick = logOutOfFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
+
+var firebaseLogInButton = document.createElement(`button`);
+firebaseLogInButton.innerHTML = "Log in";
+firebaseLogInButton.id = "logInInput";
+firebaseLogInButton.style.cssFloat = "right";
+firebaseLogInButton.style.marginTop = "0.5vh";
+firebaseLogInButton.style.marginRight = "0.5vw";
+firebaseLogInButton.style.fontSize = "1.4vw";
+firebaseLogInButton.onclick = logInToFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
 
 var titleDiv = document.createElement(`div`);
 titleDiv.innerHTML = "Are's App";
@@ -114,35 +144,6 @@ passwordDiv.style.margin = "0";
 passwordDiv.style.padding = "5vh 0";
 document.getElementById("backgroundDiv").appendChild(passwordDiv);
 
-var passwordInput = document.createElement(`input`);
-passwordInput.placeholder = "Password";
-passwordInput.id = "passwordInput";
-passwordInput.type = "password";
-passwordInput.style.marginLeft = "1vw";
-passwordInput.value = "abc123";
-document.getElementById("passwordDiv").appendChild(passwordInput);
-
-var firebaseLogInButton = document.createElement(`button`);
-firebaseLogInButton.innerHTML = "Log in";
-firebaseLogInButton.id = "logInInput";
-firebaseLogInButton.style.margin = "0 2vw";
-firebaseLogInButton.style.fontSize = "5vw";
-firebaseLogInButton.onclick = logInToFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
-
-var firebaseLogOutButton = document.createElement(`button`);
-firebaseLogOutButton.innerHTML = "Log out ";
-firebaseLogOutButton.id = "logOutInput";
-firebaseLogOutButton.style.margin = "0 2vw";
-firebaseLogOutButton.style.fontSize = "5vw";
-firebaseLogOutButton.onclick = logOutOfFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
-
-var newLineInText = document.createElement(`div`);
-newLineInText.id = "newLineInText";
-newLineInText.style.marginTop = "1vh";
-document.getElementById("backgroundDiv").appendChild(newLineInText);
-
 var firebaseCreateUserButton = document.createElement(`button`);
 firebaseCreateUserButton.innerHTML = "Create user";
 firebaseCreateUserButton.id = "createUserButton";
@@ -158,11 +159,3 @@ firebaseInfoButton.style.margin = "0 0.5vw";
 firebaseInfoButton.style.fontSize = "1.4vw";
 firebaseInfoButton.onclick = testFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseInfoButton);
-
-var firebaseInitButton = document.createElement(`button`);
-firebaseInitButton.innerHTML = "change firebase info";
-firebaseInitButton.id = "usernameInput";
-firebaseInitButton.style.margin = "0 0.5vw";
-firebaseInitButton.style.fontSize = "1.4vw";
-firebaseInitButton.onclick = initFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseInitButton);
