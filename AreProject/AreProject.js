@@ -39,7 +39,7 @@ function testFirebase2() {
             document.getElementById("infoFiv").innerHTML = "No such document!";
         }
     }).catch(function (error) {
-        document.getElementById("infoFiv").innerHTML = "Error getting document!" + error;
+        document.getElementById("infoFiv").innerHTML = "Error getting document!";
     });
 }
 
