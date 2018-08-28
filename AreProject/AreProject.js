@@ -29,9 +29,23 @@ function testFirebase() {
     });
 }
 
+function testFirebase2() {
+    var docRef1 = db.collection("main").doc("test");
+    docRef1.get().then(function (doc) {
+        if (doc.exists) {
+            document.getElementById("infoFiv").innerHTML = "Document data: " + doc.data();
+        } else {
+            // doc.data() will be undefined in this case
+            document.getElementById("infoFiv").innerHTML = "No such document!";
+        }
+    }).catch(function (error) {
+        document.getElementById("infoFiv").innerHTML = "Error getting document!" + error;
+    });
+}
+
 function initFirebase() {
     var test = db.collection("main").doc("test").set({
-        divamount: 50
+        divamount: document.getElementById("variableInput").value
     });
 }
 
@@ -68,8 +82,8 @@ function logOutOfFirebase() {
     });
 }
 
-
 var bodyStyle = document.body.style;
+bodyStyle.overflow = "hidden";
 
 var mainDiv = document.createElement(`div`);
 mainDiv.id = "mainDiv";
@@ -144,13 +158,28 @@ passwordDiv.style.margin = "0";
 passwordDiv.style.padding = "5vh 0";
 document.getElementById("backgroundDiv").appendChild(passwordDiv);
 
-var firebaseCreateUserButton = document.createElement(`button`);
-firebaseCreateUserButton.innerHTML = "Create user";
-firebaseCreateUserButton.id = "createUserButton";
-firebaseCreateUserButton.style.margin = "0 0.5vw";
-firebaseCreateUserButton.style.fontSize = "1.4vw";
-firebaseCreateUserButton.onclick = createUserInFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseCreateUserButton);
+var passwordInput = document.createElement(`input`);
+passwordInput.placeholder = "Password";
+passwordInput.id = "passwordInput";
+passwordInput.style.marginLeft = "1vw";
+passwordInput.value = "abc123";
+passwordInput.type = "password";
+document.getElementById("passwordDiv").appendChild(passwordInput);
+
+var firebaseInitButton = document.createElement(`button`);
+firebaseInitButton.innerHTML = "Change firebase info";
+firebaseInitButton.id = "InitButton";
+firebaseInitButton.style.margin = "0 0.5vw";
+firebaseInitButton.style.fontSize = "1.4vw";
+firebaseInitButton.onclick = initFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseInitButton);
+
+var variableInput = document.createElement(`input`);
+variableInput.placeholder = "Input data";
+variableInput.id = "variableInput";
+variableInput.style.marginRight = "1vw";
+variableInput.style.width = "7vw";
+document.getElementById("backgroundDiv").appendChild(variableInput);
 
 var firebaseInfoButton = document.createElement(`button`);
 firebaseInfoButton.innerHTML = "See firebase info";
@@ -159,3 +188,10 @@ firebaseInfoButton.style.margin = "0 0.5vw";
 firebaseInfoButton.style.fontSize = "1.4vw";
 firebaseInfoButton.onclick = testFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseInfoButton);
+
+var infoDiv = document.createElement("div");
+infoDiv.innerHTML = testFirebase2();
+infoDiv.id = "infoDiv";
+infoDiv.style.margin = "1vh 0";
+infoDiv.style.fontSize = "1.4vw";
+document.getElementById("backgroundDiv").appendChild(infoDiv);
