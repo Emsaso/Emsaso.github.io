@@ -82,7 +82,7 @@ function logInToFirebase() {
         var email_verified = user.emailVerified;
         document.getElementById("user_para").innerHTML =
             "Welcome User : " + email_id + "<br/> Verification status : " + email_verified;
-        document.getElementById("backgroundDiv").style.background = "blue";
+        document.getElementById("backgroundDiv").style.background = "hotpink";
     }}, (700));
 }
 
