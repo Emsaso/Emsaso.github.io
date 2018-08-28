@@ -9,7 +9,7 @@ var config = {
 };
 firebase.initializeApp(config);
 var db = firebase.firestore();
-const settings = {timestampsInSnapshots: true};
+const settings = { timestampsInSnapshots: true };
 db.settings(settings);
 var databaseId;
 
@@ -29,19 +29,19 @@ function testFirebase() {
     });
 }
 
-function testFirebase2() {
-    var docRef1 = db.collection("main").doc("test");
-    docRef1.get().then(function (doc) {
-        if (doc.exists) {
-            document.getElementById("infoFiv").innerHTML = "Document data: " + doc.data();
-        } else {
-            // doc.data() will be undefined in this case
-            document.getElementById("infoFiv").innerHTML = "No such document!";
-        }
-    }).catch(function (error) {
-        document.getElementById("infoFiv").innerHTML = "Error getting document!" + error;
-    });
-}
+//function testFirebase2() {
+//    var docRef1 = db.collection("main").doc("test");
+//    docRef1.get().then(function (doc) {
+//        if (doc.exists) {
+//            document.getElementById("infoFiv").innerHTML = "Document data: " + doc.data();
+//        } else {
+//            // doc.data() will be undefined in this case
+//            document.getElementById("infoFiv").innerHTML = "No such document!";
+//        }
+//    }).catch(function (error) {
+//        document.getElementById("infoFiv").innerHTML = "Error getting document!" + error;
+//    });
+//}
 
 function initFirebase() {
     var test = db.collection("main").doc("test").set({
@@ -69,9 +69,21 @@ function logInToFirebase() {
         var errorMessage = error.message;
         // ...
         console.log(errorCode, errorMessage);
-        email = null;
-        password = null;
+
     });
+    email = null;
+    password = null;
+
+    setTimeout(function() {
+   var user = firebase.auth().currentUser;
+    console.log(user);
+    if (user !== null) {
+        var email_id = user.email;
+        var email_verified = user.emailVerified;
+        document.getElementById("user_para").innerHTML =
+            "Welcome User : " + email_id + "<br/> Verification status : " + email_verified;
+        document.getElementById("backgroundDiv").style.background = "hotpink";
+    }}, (700));
 }
 
 function logOutOfFirebase() {
@@ -79,6 +91,18 @@ function logOutOfFirebase() {
         // Sign-out successful.
     }).catch(function (error) {
         // An error happened.
+        });
+    document.getElementById("backgroundDiv").style.background = "#bbbbbb";
+    document.getElementById("user_para").innerHTML = "Not logged in";
+}
+
+function send_verification() {
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(function () {
+
+    }).catch(function (error) {
+
     });
 }
 
@@ -129,6 +153,16 @@ firebaseLogInButton.style.fontSize = "1.4vw";
 firebaseLogInButton.onclick = logInToFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
 
+var firebaseAuthenticationButton = document.createElement(`button`);
+firebaseAuthenticationButton.innerHTML = "Send verification";
+firebaseAuthenticationButton.id = "verificationButton";
+firebaseAuthenticationButton.style.cssFloat = "right";
+firebaseAuthenticationButton.style.marginTop = "0.5vh";
+firebaseAuthenticationButton.style.marginRight = "0.5vw";
+firebaseAuthenticationButton.style.fontSize = "1.4vw";
+firebaseAuthenticationButton.onclick = send_verification;
+document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButton);
+
 var titleDiv = document.createElement(`div`);
 titleDiv.innerHTML = "Are's App";
 titleDiv.id = "titleDiv";
@@ -150,6 +184,14 @@ usernameInput.id = "usernameInput";
 usernameInput.style.marginLeft = "1vw";
 usernameInput.value = "emil@getacademy.no";
 document.getElementById("usernameDiv").appendChild(usernameInput);
+
+var userparaDiv = document.createElement(`div`);
+userparaDiv.innerHTML = "Not logged in";
+userparaDiv.id = "user_para";
+userparaDiv.style.margin = "0";
+userparaDiv.style.padding = "5vh 0";
+userparaDiv.style.fontSize = "20px";
+document.getElementById("backgroundDiv").appendChild(userparaDiv);
 
 var passwordDiv = document.createElement(`div`);
 passwordDiv.innerHTML = "Password: ";
@@ -190,7 +232,7 @@ firebaseInfoButton.onclick = testFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseInfoButton);
 
 var infoDiv = document.createElement("div");
-infoDiv.innerHTML = testFirebase2();
+//infoDiv.innerHTML = testFirebase2();
 infoDiv.id = "infoDiv";
 infoDiv.style.margin = "1vh 0";
 infoDiv.style.fontSize = "1.4vw";
