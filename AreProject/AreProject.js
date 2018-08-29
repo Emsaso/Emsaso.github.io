@@ -52,14 +52,24 @@ function initFirebase() {
 function createUserInFirebase() {
     var email = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-    });
-    document.getElementById("user_para").innerHTML =
-        "<br/> User created! You can now log in.";
+    var user = firebase.auth().currentUser;
+    var email_id = user.email;
+    if (email != false) {
+        console.log("user exists");
+
+    } else {
+        firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+            document.getElementById("user_para").innerHTML =
+                "<br/> User created! You can now log in.";
+            console.log("user created");
+        });
+        
+    } 
+    
 }
 
 function logInToFirebase() {
