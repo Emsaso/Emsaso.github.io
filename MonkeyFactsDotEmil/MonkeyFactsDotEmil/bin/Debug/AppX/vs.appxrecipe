@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Machine>DESKTOP-1MNJ1CF</Machine>
+    <WindowsUser>Get Academy</WindowsUser>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetOsVersion>10.0</TargetOsVersion>
+    <TargetOsDescription>Windows 10.0</TargetOsDescription>
+    <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
+    <PackageArchitecture>neutral</PackageArchitecture>
+    <PackageIdentityName>45f1c561-292d-4aff-9fa2-ec915c04c436</PackageIdentityName>
+    <PackageIdentityPublisher>CN=Get Academy</PackageIdentityPublisher>
+    <IntermediateOutputPath>C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\</IntermediateOutputPath>
+    <RemoteDeploymentType>
+    </RemoteDeploymentType>
+    <PackageRegistrationPath>
+    </PackageRegistrationPath>
+    <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
+    <DeployOptionalPackages>false</DeployOptionalPackages>
+    <WindowsSdkPath>
+    </WindowsSdkPath>
+    <LayoutDir>C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bin\Debug\AppX</LayoutDir>
+    <RegisteredManifestChecksum>F6A15F4A0421FBF474C367CD750E5B1943C01791B7653CBF3B172F76B7FA2C48</RegisteredManifestChecksum>
+    <RegisteredPackageMoniker>45f1c561-292d-4aff-9fa2-ec915c04c436_1.0.0.0_neutral__1v86yyak3zpe6</RegisteredPackageMoniker>
+    <RegisteredUserModeAppID>45f1c561-292d-4aff-9fa2-ec915c04c436_1v86yyak3zpe6!App</RegisteredUserModeAppID>
+    <RegisteredPackageID>45f1c561-292d-4aff-9fa2-ec915c04c436</RegisteredPackageID>
+    <RegisteredPackagePublisher>CN=Get Academy</RegisteredPackagePublisher>
+    <RegisteredVersion>1.0.0.0</RegisteredVersion>
+    <JitOptimizationSuppressed>True</JitOptimizationSuppressed>
+  </PropertyGroup>
+  <ItemGroup>
+    <AppXManifest Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bin\Debug\AppxManifest.xml">
+      <PackagePath>AppxManifest.xml</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-08-13T12:49:27.567</Modified>
+    </AppXManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Ape.jpg">
+      <PackagePath>images\Ape.jpg</PackagePath>
+      <Modified>2018-08-13T10:48:52.990</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Baboon.jpg">
+      <PackagePath>images\Baboon.jpg</PackagePath>
+      <Modified>2018-08-13T10:59:34.104</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Chimpanzee smoking.jpg">
+      <PackagePath>images\Chimpanzee smoking.jpg</PackagePath>
+      <Modified>2018-08-13T10:51:11.977</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Do not feed the monkeys.jpg">
+      <PackagePath>images\Do not feed the monkeys.jpg</PackagePath>
+      <Modified>2018-08-13T10:53:22.521</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Gibon running.jpg">
+      <PackagePath>images\Gibon running.jpg</PackagePath>
+      <Modified>2018-08-13T10:56:57.301</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Gibon.jpg">
+      <PackagePath>images\Gibon.jpg</PackagePath>
+      <Modified>2018-08-13T10:56:10.091</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Gorilla + cat.jpg">
+      <PackagePath>images\Gorilla + cat.jpg</PackagePath>
+      <Modified>2018-08-13T10:50:42.900</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\large-nose-monkey.jpg">
+      <PackagePath>images\large-nose-monkey.jpg</PackagePath>
+      <Modified>2018-08-13T10:48:18.934</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Mandrill.jpg">
+      <PackagePath>images\Mandrill.jpg</PackagePath>
+      <Modified>2018-08-13T10:59:15.792</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Orangutan.jpg">
+      <PackagePath>images\Orangutan.jpg</PackagePath>
+      <Modified>2018-08-13T10:52:43.753</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Howler monkeys.gif">
+      <PackagePath>images\Howler monkeys.gif</PackagePath>
+      <Modified>2018-08-13T10:54:11.560</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\index.html">
+      <PackagePath>index.html</PackagePath>
+      <Modified>2018-08-13T12:48:30.967</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\LockScreenLogo.scale-200.png">
+      <PackagePath>images\LockScreenLogo.scale-200.png</PackagePath>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\SplashScreen.scale-200.png">
+      <PackagePath>images\SplashScreen.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Square150x150Logo.scale-200.png">
+      <PackagePath>images\Square150x150Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Square44x44Logo.scale-200.png">
+      <PackagePath>images\Square44x44Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Square44x44Logo.targetsize-24_altform-unplated.png">
+      <PackagePath>images\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\StoreLogo.png">
+      <PackagePath>images\StoreLogo.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\images\Wide310x150Logo.scale-200.png">
+      <PackagePath>images\Wide310x150Logo.scale-200.png</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-06-18T10:49:21.780</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\js\main.js">
+      <PackagePath>js\main.js</PackagePath>
+      <Modified>2018-08-13T12:49:21.896</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\css\default.css">
+      <PackagePath>css\default.css</PackagePath>
+      <Modified>2018-08-13T11:42:04.034</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bin\Debug\ReverseMap\resources.pri">
+      <PackagePath>resources.pri</PackagePath>
+      <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
+      <Modified>2018-08-13T12:49:27.390</Modified>
+    </AppxPackagedFile>
+  </ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
+</Project>

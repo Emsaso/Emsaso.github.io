@@ -1,0 +1,17 @@
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bin\Debug\ReverseMap\resources.pri
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bin\Debug\AppxManifest.xml
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bin\Debug\MonkeyFactsDotEmil.build.appxrecipe
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\MonkeyFactsDotEmil.jsproj.CoreCompileInputs.cache
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\ResourceHandlingTask.state
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\priconfig.xml
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\priconfig.xml.intermediate
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\layout.resfiles
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\layout.resfiles.intermediate
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\resources.resfiles
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\resources.resfiles.intermediate
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\pri.resfiles
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\pri.resfiles.intermediate
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\qualifiers.txt
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\qualifiers.txt.intermediate
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\MultipleQualifiersPerDimensionFound.txt
+C:\Users\Get Academy\source\repos\MonkeyFactsDotEmil\MonkeyFactsDotEmil\bld\Debug\ProjectArchitectures.txt

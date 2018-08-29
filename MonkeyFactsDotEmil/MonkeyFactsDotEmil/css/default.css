@@ -1,0 +1,12 @@
+﻿img {
+    width: 50vw;
+    height: 45vw;
+    display: block;
+    margin: 1.5vw;
+}
+div {
+    display: block;
+    position: absolute;
+    margin-left: 55vw;
+    font-size: 3vw;
+}
