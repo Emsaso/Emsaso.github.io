@@ -270,7 +270,7 @@ document.getElementById("backgroundDiv").appendChild(variableInput);
 
 var firebaseInfoButton = document.createElement(`button`);
 firebaseInfoButton.innerHTML = "See firebase info";
-firebaseInfoButton.id = "usernameInput";
+firebaseInfoButton.id = "firebaseInfoButton";
 firebaseInfoButton.style.margin = "0 0.5vw";
 firebaseInfoButton.style.fontSize = "1.4vw";
 firebaseInfoButton.onclick = testFirebase;
