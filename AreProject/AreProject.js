@@ -58,11 +58,17 @@ function createUserInFirebase() {
         var errorMessage = error.message;
         // ...
     });
+    document.getElementById("user_para").innerHTML =
+        "<br/> User created! You can now log in.";
 }
 
 function logInToFirebase() {
     var email = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
+    firebaseLogOutButton.style.display = "block";
+    firebaseLogInButton.style.display = "none";
+    firebaseCreateUserButton.style.display = "none";
+
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
@@ -74,16 +80,35 @@ function logInToFirebase() {
     email = null;
     password = null;
 
-    setTimeout(function() {
-   var user = firebase.auth().currentUser;
-    console.log(user);
-    if (user !== null) {
+
+
+    setTimeout(function () {
+        var user = firebase.auth().currentUser;
+        console.log(user);
+
         var email_id = user.email;
         var email_verified = user.emailVerified;
-        document.getElementById("user_para").innerHTML =
-            "Welcome User : " + email_id + "<br/> Verification status : " + email_verified;
-        document.getElementById("backgroundDiv").style.background = "blue";
-    }}, (700));
+
+        if (user !== null) {
+
+            document.getElementById("user_para").innerHTML =
+                "Welcome User : " + email_id + "<br/> Verification status : " + email_verified;
+            document.getElementById("backgroundDiv").style.background = "blue";
+        }
+
+        if (email_verified != false) {
+
+            document.getElementById("verificationButton").style.display = "none";
+            console.log("Verified = OK");
+        } else {
+
+            document.getElementById("verificationButton").style.display = "block";
+        }
+    }, (700));
+
+
+
+
 }
 
 function logOutOfFirebase() {
@@ -91,9 +116,14 @@ function logOutOfFirebase() {
         // Sign-out successful.
     }).catch(function (error) {
         // An error happened.
-        });
+    });
     document.getElementById("backgroundDiv").style.background = "#bbbbbb";
     document.getElementById("user_para").innerHTML = "Not logged in";
+    document.getElementById("verificationButton").style.display = "none";
+    firebaseLogOutButton.style.display = "none";
+    firebaseLogInButton.style.display = "block";
+    firebaseCreateUserButton.style.display = "block";
+
 }
 
 function send_verification() {
@@ -103,7 +133,8 @@ function send_verification() {
 
     }).catch(function (error) {
 
-    });
+        });
+    alert("Verification link has been sent to your email address.");
 }
 
 var bodyStyle = document.body.style;
@@ -130,6 +161,7 @@ firebaseCreateUserButton.style.cssFloat = "right";
 firebaseCreateUserButton.style.marginTop = "0.5vh";
 firebaseCreateUserButton.style.marginRight = "0.5vw";
 firebaseCreateUserButton.style.fontSize = "1.4vw";
+firebaseCreateUserButton.style.display = "block";
 firebaseCreateUserButton.onclick = createUserInFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseCreateUserButton);
 
@@ -140,6 +172,7 @@ firebaseLogOutButton.style.cssFloat = "right";
 firebaseLogOutButton.style.marginTop = "0.5vh";
 firebaseLogOutButton.style.marginRight = "0.5vw";
 firebaseLogOutButton.style.fontSize = "1.4vw";
+firebaseLogOutButton.style.display = "none";
 firebaseLogOutButton.onclick = logOutOfFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
 
@@ -150,6 +183,7 @@ firebaseLogInButton.style.cssFloat = "right";
 firebaseLogInButton.style.marginTop = "0.5vh";
 firebaseLogInButton.style.marginRight = "0.5vw";
 firebaseLogInButton.style.fontSize = "1.4vw";
+firebaseLogInButton.style.display = "block";
 firebaseLogInButton.onclick = logInToFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
 
@@ -157,6 +191,7 @@ var firebaseAuthenticationButton = document.createElement(`button`);
 firebaseAuthenticationButton.innerHTML = "Send verification";
 firebaseAuthenticationButton.id = "verificationButton";
 firebaseAuthenticationButton.style.cssFloat = "right";
+firebaseAuthenticationButton.style.display = "none";
 firebaseAuthenticationButton.style.marginTop = "0.5vh";
 firebaseAuthenticationButton.style.marginRight = "0.5vw";
 firebaseAuthenticationButton.style.fontSize = "1.4vw";
