@@ -77,7 +77,6 @@ function logInToFirebase() {
 
             document.getElementById("user_para").innerHTML =
                 "Welcome User : " + email_id + "<br/> Verification status : " + email_verified;
-            document.getElementById("backgroundDiv").style.background = "blue";
         }
 
         if (email_verified != false) {
@@ -97,7 +96,6 @@ function logOutOfFirebase() {
     }).catch(function (error) {
         // An error happened.
     });
-    document.getElementById("backgroundDiv").style.background = "#bbbbbb";
     document.getElementById("user_para").innerHTML = "Not logged in";
     document.getElementById("verificationButton").style.display = "none";
     firebaseLogOutButton.style.display = "none";
@@ -131,7 +129,6 @@ function send_verification() {
 }
 
 var bodyStyle = document.body.style;
-bodyStyle.overflow = "hidden";
 
 var mainDiv = document.createElement(`div`);
 mainDiv.id = "mainDiv";
@@ -142,7 +139,6 @@ document.body.appendChild(mainDiv);
 var backgroundDiv = document.createElement(`div`);
 backgroundDiv.id = "backgroundDiv";
 backgroundDiv.style.margin = "0";
-backgroundDiv.style.paddingBottom = "45vh";
 backgroundDiv.style.background = "#ffffff";
 backgroundDiv.style.textAlign = "center";
 document.getElementById("mainDiv").appendChild(backgroundDiv);
@@ -201,12 +197,18 @@ document.getElementById("backgroundDiv").appendChild(titleDiv);
 //firebaseForgotPassButton.onclick = forgotPass;
 //document.getElementById("backgroundDiv").appendChild(firebaseForgotPassButton);
 
+var spaceGenerator = document.createElement(`div`);
+spaceGenerator.id = "spaceGenerator";
+spaceGenerator.style.marginTop = "20vh";
+document.getElementById("backgroundDiv").appendChild(spaceGenerator);
+
 var firebaseLogInButton = document.createElement(`div`);
 firebaseLogInButton.innerHTML = "Log in";
 firebaseLogInButton.id = "logInInput";
 firebaseLogInButton.style.margin = "auto";
-firebaseLogInButton.style.marginTop = "32vh";
-firebaseLogInButton.style.marginLeft = "5vw";
+//firebaseLogInButton.style.marginTop = "32vh";
+firebaseLogInButton.style.marginLeft = "7vw";
+firebaseLogInButton.style.marginRight = "2vw";
 firebaseLogInButton.style.cssFloat = "left";
 firebaseLogInButton.style.width = "40vw";
 firebaseLogInButton.style.padding = "2.5vh 0";
@@ -223,8 +225,9 @@ var firebaseCreateUserButton = document.createElement(`div`);
 firebaseCreateUserButton.innerHTML = "Sign up";
 firebaseCreateUserButton.id = "createUserButton";
 firebaseCreateUserButton.style.margin = "auto";
-firebaseCreateUserButton.style.marginTop = "32vh";
-firebaseCreateUserButton.style.marginRight = "5vw";
+//firebaseCreateUserButton.style.marginTop = "32vh";
+firebaseCreateUserButton.style.marginRight = "7vw";
+firebaseCreateUserButton.style.marginLeft = "2vw";
 firebaseCreateUserButton.style.cssFloat = "right";
 firebaseCreateUserButton.style.width = "40vw";
 firebaseCreateUserButton.style.padding = "2.5vh 0";
@@ -258,7 +261,8 @@ document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButto
 var firebaseEnterAnonButton = document.createElement(`div`);
 firebaseEnterAnonButton.innerHTML = "Or enter without log in";
 firebaseEnterAnonButton.id = "EnterAnon";
-firebaseEnterAnonButton.style.marginBottom = "0";
+firebaseEnterAnonButton.style.marginTop = "30vh";
+firebaseEnterAnonButton.style.paddingTop = "5vh";
 firebaseEnterAnonButton.style.textAlign = "center";
 firebaseEnterAnonButton.style.cssFloat = "bottom";
 firebaseEnterAnonButton.style.fontSize = "5vw";
