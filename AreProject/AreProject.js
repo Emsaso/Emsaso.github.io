@@ -15,47 +15,13 @@ var databaseId;
 
 var database = firebase.database();
 
-function testFirebase() {
-    var docRef1 = db.collection("main").doc("test");
-    docRef1.get().then(function (doc) {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function (error) {
-        console.log("Error getting document:", error);
-    });
-}
-
-//function testFirebase2() {
-//    var docRef1 = db.collection("main").doc("test");
-//    docRef1.get().then(function (doc) {
-//        if (doc.exists) {
-//            document.getElementById("infoFiv").innerHTML = "Document data: " + doc.data();
-//        } else {
-//            // doc.data() will be undefined in this case
-//            document.getElementById("infoFiv").innerHTML = "No such document!";
-//        }
-//    }).catch(function (error) {
-//        document.getElementById("infoFiv").innerHTML = "Error getting document!" + error;
-//    });
-//}
-
-function initFirebase() {
-    var test = db.collection("main").doc("test").set({
-        divamount: document.getElementById("variableInput").value
-    });
-}
-
 function createUserInFirebase() {
     var email = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
     var user = firebase.auth().currentUser;
 
     if (user !== null) {
-        
+
         console.log("user exists");
 
     } else {
@@ -67,27 +33,34 @@ function createUserInFirebase() {
             // ...
             document.getElementById("user_para").innerHTML =
                 "<br/> User created! You can now log in.";
-            });
-        
-    } 
-    
+        });
+
+    }
+
 }
 
 function logInToFirebase() {
     var email = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
+
     firebaseLogOutButton.style.display = "block";
     firebaseLogInButton.style.display = "none";
     firebaseCreateUserButton.style.display = "none";
+    firebaseForgotPassButton.style.display = "none";
 
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+        firebaseLogOutButton.style.display = "none";
+        firebaseLogInButton.style.display = "block";
+        firebaseCreateUserButton.style.display = "block";
+        document.getElementById("user_para").innerHTML = "incorrect username / password";
         console.log(errorCode, errorMessage);
-
     });
+
+
     email = null;
     password = null;
 
@@ -116,10 +89,6 @@ function logInToFirebase() {
             document.getElementById("verificationButton").style.display = "block";
         }
     }, (700));
-
-
-
-
 }
 
 function logOutOfFirebase() {
@@ -134,7 +103,20 @@ function logOutOfFirebase() {
     firebaseLogOutButton.style.display = "none";
     firebaseLogInButton.style.display = "block";
     firebaseCreateUserButton.style.display = "block";
+    firebaseForgotPassButton.style.display = "block";
+}
 
+function forgotPass() {
+    var auth = firebase.auth();
+    var email = document.getElementById("usernameInput").value;
+    
+    auth.sendPasswordResetEmail(email).then(function () {
+        console.log("Email-sent");
+        alert("Email has been sent to you with instructions.");
+    }).catch(function (error) {
+        console.log("Email not sent");
+        alert("Wrong email!");
+    });
 }
 
 function send_verification() {
@@ -144,7 +126,7 @@ function send_verification() {
 
     }).catch(function (error) {
 
-        });
+    });
     alert("Verification link has been sent to your email address.");
 }
 
@@ -164,53 +146,8 @@ backgroundDiv.style.paddingBottom = "45vh";
 backgroundDiv.style.background = "#bbbbbb";
 backgroundDiv.style.textAlign = "center";
 document.getElementById("mainDiv").appendChild(backgroundDiv);
-
-var firebaseCreateUserButton = document.createElement(`button`);
-firebaseCreateUserButton.innerHTML = "Create user";
-firebaseCreateUserButton.id = "createUserButton";
-firebaseCreateUserButton.style.cssFloat = "right";
-firebaseCreateUserButton.style.marginTop = "0.5vh";
-firebaseCreateUserButton.style.marginRight = "0.5vw";
-firebaseCreateUserButton.style.fontSize = "1.4vw";
-firebaseCreateUserButton.style.display = "block";
-firebaseCreateUserButton.onclick = createUserInFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseCreateUserButton);
-
-var firebaseLogOutButton = document.createElement(`button`);
-firebaseLogOutButton.innerHTML = "Log out ";
-firebaseLogOutButton.id = "logOutInput";
-firebaseLogOutButton.style.cssFloat = "right";
-firebaseLogOutButton.style.marginTop = "0.5vh";
-firebaseLogOutButton.style.marginRight = "0.5vw";
-firebaseLogOutButton.style.fontSize = "1.4vw";
-firebaseLogOutButton.style.display = "none";
-firebaseLogOutButton.onclick = logOutOfFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
-
-var firebaseLogInButton = document.createElement(`button`);
-firebaseLogInButton.innerHTML = "Log in";
-firebaseLogInButton.id = "logInInput";
-firebaseLogInButton.style.cssFloat = "right";
-firebaseLogInButton.style.marginTop = "0.5vh";
-firebaseLogInButton.style.marginRight = "0.5vw";
-firebaseLogInButton.style.fontSize = "1.4vw";
-firebaseLogInButton.style.display = "block";
-firebaseLogInButton.onclick = logInToFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
-
-var firebaseAuthenticationButton = document.createElement(`button`);
-firebaseAuthenticationButton.innerHTML = "Send verification";
-firebaseAuthenticationButton.id = "verificationButton";
-firebaseAuthenticationButton.style.cssFloat = "right";
-firebaseAuthenticationButton.style.display = "none";
-firebaseAuthenticationButton.style.marginTop = "0.5vh";
-firebaseAuthenticationButton.style.marginRight = "0.5vw";
-firebaseAuthenticationButton.style.fontSize = "1.4vw";
-firebaseAuthenticationButton.onclick = send_verification;
-document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButton);
-
 var titleDiv = document.createElement(`div`);
-titleDiv.innerHTML = "Are's App";
+titleDiv.innerHTML = "ReNewGen";
 titleDiv.id = "titleDiv";
 titleDiv.style.margin = "0";
 titleDiv.style.padding = "5vh 0";
@@ -254,32 +191,48 @@ passwordInput.value = "abc123";
 passwordInput.type = "password";
 document.getElementById("passwordDiv").appendChild(passwordInput);
 
-var firebaseInitButton = document.createElement(`button`);
-firebaseInitButton.innerHTML = "Change firebase info";
-firebaseInitButton.id = "InitButton";
-firebaseInitButton.style.margin = "0 0.5vw";
-firebaseInitButton.style.fontSize = "1.4vw";
-firebaseInitButton.onclick = initFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseInitButton);
+var firebaseForgotPassButton = document.createElement(`button`);
+firebaseForgotPassButton.innerHTML = "Forgot password?";
+firebaseForgotPassButton.id = "forgotPass";
+firebaseForgotPassButton.style.margin = "auto";
+firebaseForgotPassButton.style.fontSize = "1.4vw";
+firebaseForgotPassButton.style.display = "block";
+firebaseForgotPassButton.onclick = forgotPass;
+document.getElementById("backgroundDiv").appendChild(firebaseForgotPassButton);
 
-var variableInput = document.createElement(`input`);
-variableInput.placeholder = "Input data";
-variableInput.id = "variableInput";
-variableInput.style.marginRight = "1vw";
-variableInput.style.width = "7vw";
-document.getElementById("backgroundDiv").appendChild(variableInput);
+var firebaseCreateUserButton = document.createElement(`button`);
+firebaseCreateUserButton.innerHTML = "Create user";
+firebaseCreateUserButton.id = "createUserButton";
+firebaseCreateUserButton.style.margin = "auto";
+firebaseCreateUserButton.style.cssfloat = "";
+firebaseCreateUserButton.style.fontSize = "1.4vw";
+firebaseCreateUserButton.style.display = "block";
+firebaseCreateUserButton.onclick = createUserInFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseCreateUserButton);
 
-var firebaseInfoButton = document.createElement(`button`);
-firebaseInfoButton.innerHTML = "See firebase info";
-firebaseInfoButton.id = "firebaseInfoButton";
-firebaseInfoButton.style.margin = "0 0.5vw";
-firebaseInfoButton.style.fontSize = "1.4vw";
-firebaseInfoButton.onclick = testFirebase;
-document.getElementById("backgroundDiv").appendChild(firebaseInfoButton);
+var firebaseLogOutButton = document.createElement(`button`);
+firebaseLogOutButton.innerHTML = "Log out ";
+firebaseLogOutButton.id = "logOutInput";
+firebaseLogOutButton.style.margin = "auto";
+firebaseLogOutButton.style.fontSize = "1.4vw";
+firebaseLogOutButton.style.display = "none";
+firebaseLogOutButton.onclick = logOutOfFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
 
-var infoDiv = document.createElement("div");
-//infoDiv.innerHTML = testFirebase2();
-infoDiv.id = "infoDiv";
-infoDiv.style.margin = "1vh 0";
-infoDiv.style.fontSize = "1.4vw";
-document.getElementById("backgroundDiv").appendChild(infoDiv);
+var firebaseLogInButton = document.createElement(`button`);
+firebaseLogInButton.innerHTML = "Log in";
+firebaseLogInButton.id = "logInInput";
+firebaseLogInButton.style.margin = "auto";
+firebaseLogInButton.style.fontSize = "1.4vw";
+firebaseLogInButton.style.display = "block";
+firebaseLogInButton.onclick = logInToFirebase;
+document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
+
+var firebaseAuthenticationButton = document.createElement(`button`);
+firebaseAuthenticationButton.innerHTML = "Send verification";
+firebaseAuthenticationButton.id = "verificationButton";
+firebaseAuthenticationButton.style.display = "none";
+firebaseAuthenticationButton.style.margin = "auto";
+firebaseAuthenticationButton.style.fontSize = "1.4vw";
+firebaseAuthenticationButton.onclick = send_verification;
+document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButton);
