@@ -5,20 +5,37 @@
     <meta charset="utf-8" />
     <title></title>
     <style>
-
+        #mainContent {
+            text-align: center;
+            background-color: #eeeeee;
+        }
+        #backgroundDiv {
+            margin: 1%;
+            background-color: #ffffff;
+        }
         #logo {
+            margin: auto;
             width: 33%;
             height: 33%;
+        }
+        button {
+            min-width: 20%;
+            max-width: 20%;
+            padding: 1% 0;
+            font-size: 200%
         }
     </style>
 </head>
 <body>
     <div id="mainContent">
         <div id="backgroundDiv">
-            <img id="logo" src ="Images/logo.png" />
-            <button id="loginButton"></button>
-            <button id="signUpButton"></button>
-            <div id="anonymousButton"></div>
+            <img id="logo" src="Images/logo.png" />
+            <br />
+            <button id="loginButton" onclick="logInToFirebase">Log in</button>
+            <button id="logoutButton" onclick="logOutOfFirebase">Log in</button>
+            <button id="signUpButton" onclick="createUserInFirebase">Sign up</button>
+            <br />
+            <div id="anonymousButton">Enter anonymously</div>
         </div>
     </div>
 
