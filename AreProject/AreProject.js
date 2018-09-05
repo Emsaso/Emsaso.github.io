@@ -15,6 +15,18 @@ var databaseId;
 
 var database = firebase.database();
 
+function preCreateUserInFirebase() {
+    usernameInput.style.visibility = "visible";
+    passwordInput.style.visibility = "visible";
+    firebaseForgotPassButton.style.visibility = "visible";
+    firebaseForgotPassButton.style.display = "block";
+    firebaseLogOutButton.style.display = "none";
+    preLogInButton.style.display = "none";
+    firebaseLogInButton.style.display = "none";
+    preCreateUserButton.style.display = "none";
+    firebaseCreateUserButton.style.display = "block";
+}
+
 function createUserInFirebase() {
     var email = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
@@ -33,16 +45,33 @@ function createUserInFirebase() {
             // ...
             document.getElementById("user_para").innerHTML =
                 "<br/> User created! You can now log in.";
+            firebaseCreateUserButton.style.display = "none";
+            firebaseLogInButton.style.display = "block";
         });
 
     }
 
 }
 
+function preLogInToFirebase() {
+    usernameInput.style.visibility = "visible";
+    passwordInput.style.visibility = "visible";
+    firebaseForgotPassButton.style.visibility = "visible";
+    firebaseLogOutButton.style.display = "none";
+    preLogInButton.style.display = "none";
+    firebaseLogInButton.style.display = "block";
+    preCreateUserButton.style.display = "none";
+    firebaseCreateUserButton.style.display = "none";
+    firebaseForgotPassButton.style.display = "block";
+};
+
 function logInToFirebase() {
     var email = document.getElementById("usernameInput").value;
     var password = document.getElementById("passwordInput").value;
 
+    usernameInput.style.visibility = "hidden";
+    passwordInput.style.visibility = "hidden";
+    firebaseForgotPassButton.style.visibility = "hidden";
     firebaseLogOutButton.style.display = "block";
     firebaseLogInButton.style.display = "none";
     firebaseCreateUserButton.style.display = "none";
@@ -99,8 +128,8 @@ function logOutOfFirebase() {
     document.getElementById("user_para").innerHTML = "Not logged in";
     document.getElementById("verificationButton").style.display = "none";
     firebaseLogOutButton.style.display = "none";
-    firebaseLogInButton.style.display = "block";
-    firebaseCreateUserButton.style.display = "block";
+    preLogInButton.style.display = "block";
+    preCreateUserButton.style.display = "block";
     firebaseForgotPassButton.style.display = "block";
 }
 
@@ -144,84 +173,122 @@ backgroundDiv.style.textAlign = "center";
 document.getElementById("mainDiv").appendChild(backgroundDiv);
 
 var titleDiv = document.createElement(`img`);
-titleDiv.style.marginTop = "10vh";
+titleDiv.style.marginTop = "15vh";
 titleDiv.src = "images/logo.png";
 titleDiv.id = "titleDiv";
-titleDiv.style.width = "25%";
-titleDiv.style.height = "25%";
+titleDiv.style.width = "75%";
+titleDiv.style.height = "75%";
 document.getElementById("backgroundDiv").appendChild(titleDiv);
 
-//var usernameDiv = document.createElement(`div`);
-//usernameDiv.innerHTML = "Username: ";
-//usernameDiv.id = "usernameDiv";
-//usernameDiv.style.margin = "0";
-//usernameDiv.style.padding = "5vh 0";
-//document.getElementById("backgroundDiv").appendChild(usernameDiv);
+var usernameDiv = document.createElement(`div`);
+usernameDiv.innerHTML = "";
+usernameDiv.id = "usernameDiv";
+usernameDiv.style.margin = "0";
+usernameDiv.style.padding = "2vh 0";
+document.getElementById("backgroundDiv").appendChild(usernameDiv);
 
-//var usernameInput = document.createElement(`input`);
-//usernameInput.placeholder = "Username";
-//usernameInput.id = "usernameInput";
-//usernameInput.style.marginLeft = "1vw";
+var usernameInput = document.createElement(`input`);
+usernameInput.placeholder = "Username";
+usernameInput.id = "usernameInput";
+usernameInput.style.fontSize = "300%";
+usernameInput.style.visibility = "hidden";
+usernameInput.style.marginLeft = "1vw";
+usernameInput.style.paddingLeft = "3vw";
+usernameInput.style.borderRadius = "20px";
 //usernameInput.value = "emil@getacademy.no";
-//document.getElementById("usernameDiv").appendChild(usernameInput);
+document.getElementById("usernameDiv").appendChild(usernameInput);
 
-//var userparaDiv = document.createElement(`div`);
-//userparaDiv.innerHTML = "Not logged in";
-//userparaDiv.id = "user_para";
-//userparaDiv.style.margin = "0";
-//userparaDiv.style.padding = "5vh 0";
-//userparaDiv.style.fontSize = "20px";
-//document.getElementById("backgroundDiv").appendChild(userparaDiv);
+var passwordDiv = document.createElement(`div`);
+passwordDiv.innerHTML = "";
+passwordDiv.id = "passwordDiv";
+passwordDiv.style.margin = "0";
+passwordDiv.style.padding = "2vh 0";
+document.getElementById("backgroundDiv").appendChild(passwordDiv);
 
-//var passwordDiv = document.createElement(`div`);
-//passwordDiv.innerHTML = "Password: ";
-//passwordDiv.id = "passwordDiv";
-//passwordDiv.style.margin = "0";
-//passwordDiv.style.padding = "5vh 0";
-//document.getElementById("backgroundDiv").appendChild(passwordDiv);
-
-//var passwordInput = document.createElement(`input`);
-//passwordInput.placeholder = "Password";
-//passwordInput.id = "passwordInput";
-//passwordInput.style.marginLeft = "1vw";
+var passwordInput = document.createElement(`input`);
+passwordInput.placeholder = "Password";
+passwordInput.id = "passwordInput";
+passwordInput.style.fontSize = "300%";
+passwordInput.style.visibility = "hidden";
+passwordInput.style.marginLeft = "1vw";
+passwordInput.style.paddingLeft = "3vw";
+passwordInput.style.borderRadius = "20px";
 //passwordInput.value = "abc123";
-//passwordInput.type = "password";
-//document.getElementById("passwordDiv").appendChild(passwordInput);
+passwordInput.type = "password";
+document.getElementById("passwordDiv").appendChild(passwordInput);
 
-//var firebaseForgotPassButton = document.createElement(`div`);
-//firebaseForgotPassButton.innerHTML = "Forgot password?";
-//firebaseForgotPassButton.id = "forgotPass";
-//firebaseForgotPassButton.style.margin = "auto";
-//firebaseForgotPassButton.style.fontSize = "8vw";
-//firebaseForgotPassButton.style.color = "#ffffff";
-//firebaseForgotPassButton.style.display = "block";
-//firebaseForgotPassButton.style.backgroundColor = "#bebebe";
-//firebaseForgotPassButton.onclick = forgotPass;
-//document.getElementById("backgroundDiv").appendChild(firebaseForgotPassButton);
+var firebaseForgotPassButton = document.createElement(`div`);
+firebaseForgotPassButton.innerHTML = "Forgot password?";
+firebaseForgotPassButton.id = "forgotPass";
+firebaseForgotPassButton.style.visibility = "hidden";
+firebaseForgotPassButton.style.margin = "auto";
+firebaseForgotPassButton.style.fontSize = "5vw";
+firebaseForgotPassButton.style.textDecoration = "underline";
+firebaseForgotPassButton.style.display = "block";
+firebaseForgotPassButton.onclick = forgotPass;
+document.getElementById("backgroundDiv").appendChild(firebaseForgotPassButton);
 
-var spaceGenerator = document.createElement(`div`);
-spaceGenerator.id = "spaceGenerator";
-spaceGenerator.style.marginTop = "20vh";
-document.getElementById("backgroundDiv").appendChild(spaceGenerator);
+var userparaDiv = document.createElement(`div`);
+userparaDiv.innerHTML = "Not logged in";
+userparaDiv.id = "user_para";
+userparaDiv.style.margin = "0";
+userparaDiv.style.padding = "2vh 0";
+userparaDiv.style.fontSize = "3vw";
+document.getElementById("backgroundDiv").appendChild(userparaDiv);
+
+var preLogInButton = document.createElement(`div`);
+preLogInButton.innerHTML = "Log in";
+preLogInButton.id = "logInInput";
+preLogInButton.style.margin = "auto";
+//preLogInButton.style.marginTop = "32vh";
+preLogInButton.style.marginLeft = "7vw";
+preLogInButton.style.marginRight = "2vw";
+preLogInButton.style.cssFloat = "left";
+preLogInButton.style.width = "40vw";
+preLogInButton.style.padding = "2.5vh 0";
+preLogInButton.style.borderRadius = "20px";
+preLogInButton.style.fontSize = "5vw";
+preLogInButton.style.fontFamily = "Helvetica";
+preLogInButton.style.color = "#ffffff";
+preLogInButton.style.display = "block";
+preLogInButton.style.backgroundColor = "#bebebe";
+preLogInButton.onclick = preLogInToFirebase;
+document.getElementById("backgroundDiv").appendChild(preLogInButton);
 
 var firebaseLogInButton = document.createElement(`div`);
 firebaseLogInButton.innerHTML = "Log in";
 firebaseLogInButton.id = "logInInput";
+firebaseLogInButton.style.display = "none";
 firebaseLogInButton.style.margin = "auto";
 //firebaseLogInButton.style.marginTop = "32vh";
-firebaseLogInButton.style.marginLeft = "7vw";
-firebaseLogInButton.style.marginRight = "2vw";
-firebaseLogInButton.style.cssFloat = "left";
-firebaseLogInButton.style.width = "40vw";
+firebaseLogInButton.style.width = "80vw";
 firebaseLogInButton.style.padding = "2.5vh 0";
 firebaseLogInButton.style.borderRadius = "20px";
 firebaseLogInButton.style.fontSize = "5vw";
 firebaseLogInButton.style.fontFamily = "Helvetica";
 firebaseLogInButton.style.color = "#ffffff";
-firebaseLogInButton.style.display = "block";
 firebaseLogInButton.style.backgroundColor = "#bebebe";
 firebaseLogInButton.onclick = logInToFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseLogInButton);
+
+var preCreateUserButton = document.createElement(`div`);
+preCreateUserButton.innerHTML = "Sign up";
+preCreateUserButton.id = "createUserButton";
+preCreateUserButton.style.margin = "auto";
+//preCreateUserButton.style.marginTop = "32vh";
+preCreateUserButton.style.marginRight = "7vw";
+preCreateUserButton.style.marginLeft = "2vw";
+preCreateUserButton.style.cssFloat = "right";
+preCreateUserButton.style.width = "40vw";
+preCreateUserButton.style.padding = "2.5vh 0";
+preCreateUserButton.style.borderRadius = "20px";
+preCreateUserButton.style.fontSize = "5vw";
+preCreateUserButton.style.fontFamily = "Helvetica";
+preCreateUserButton.style.color = "#ffffff";
+preCreateUserButton.style.display = "block";
+preCreateUserButton.style.backgroundColor = "#bebebe";
+preCreateUserButton.onclick = preCreateUserInFirebase;
+document.getElementById("backgroundDiv").appendChild(preCreateUserButton);
 
 var firebaseCreateUserButton = document.createElement(`div`);
 firebaseCreateUserButton.innerHTML = "Sign up";
@@ -231,13 +298,13 @@ firebaseCreateUserButton.style.margin = "auto";
 firebaseCreateUserButton.style.marginRight = "7vw";
 firebaseCreateUserButton.style.marginLeft = "2vw";
 firebaseCreateUserButton.style.cssFloat = "right";
-firebaseCreateUserButton.style.width = "40vw";
+firebaseCreateUserButton.style.width = "80vw";
 firebaseCreateUserButton.style.padding = "2.5vh 0";
 firebaseCreateUserButton.style.borderRadius = "20px";
 firebaseCreateUserButton.style.fontSize = "5vw";
 firebaseCreateUserButton.style.fontFamily = "Helvetica";
 firebaseCreateUserButton.style.color = "#ffffff";
-firebaseCreateUserButton.style.display = "block";
+firebaseCreateUserButton.style.display = "none";
 firebaseCreateUserButton.style.backgroundColor = "#bebebe";
 firebaseCreateUserButton.onclick = createUserInFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseCreateUserButton);
@@ -246,8 +313,14 @@ var firebaseLogOutButton = document.createElement(`button`);
 firebaseLogOutButton.innerHTML = "Log out ";
 firebaseLogOutButton.id = "logOutInput";
 firebaseLogOutButton.style.margin = "auto";
-firebaseLogOutButton.style.fontSize = "8vw";
+firebaseLogOutButton.style.fontSize = "5vw";
 firebaseLogOutButton.style.display = "none";
+firebaseLogOutButton.style.width = "40vw";
+firebaseLogOutButton.style.padding = "2.5vh 0";
+firebaseLogOutButton.style.borderRadius = "20px";
+firebaseLogOutButton.style.fontFamily = "Helvetica";
+firebaseLogOutButton.style.color = "#ffffff";
+firebaseLogOutButton.style.backgroundColor = "#bebebe";
 firebaseLogOutButton.onclick = logOutOfFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
 
@@ -256,16 +329,17 @@ firebaseAuthenticationButton.innerHTML = "Send verification";
 firebaseAuthenticationButton.id = "verificationButton";
 firebaseAuthenticationButton.style.display = "none";
 firebaseAuthenticationButton.style.margin = "auto";
-firebaseAuthenticationButton.style.fontSize = "8vw";
+firebaseAuthenticationButton.style.fontSize = "3vw";
 firebaseAuthenticationButton.onclick = send_verification;
 document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButton);
 
 var firebaseEnterAnonButton = document.createElement(`div`);
 firebaseEnterAnonButton.innerHTML = "Or enter without log in";
 firebaseEnterAnonButton.id = "EnterAnon";
-firebaseEnterAnonButton.style.marginTop = "30vh";
-firebaseEnterAnonButton.style.paddingTop = "5vh";
+firebaseEnterAnonButton.style.marginTop = "10vh";
+firebaseEnterAnonButton.style.paddingTop = "10vh";
 firebaseEnterAnonButton.style.textAlign = "center";
+firebaseEnterAnonButton.style.textDecoration = "underline";
 firebaseEnterAnonButton.style.cssFloat = "bottom";
 firebaseEnterAnonButton.style.fontSize = "3vw";
 firebaseEnterAnonButton.style.fontFamily = "Helvetica";

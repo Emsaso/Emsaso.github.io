@@ -54,6 +54,7 @@ function logInToFirebase() {
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
+        console.log(email, password);
         console.log(errorCode, errorMessage);
 
     });
