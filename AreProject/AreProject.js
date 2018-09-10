@@ -53,6 +53,31 @@ function createUserInFirebase() {
 
 }
 
+function chargeMode() {
+    enterChargeModeButton.style.display = "none";
+    useChargeTimeButton.style.display = "block";
+    stopChargeTimeButton.style.display = "block";
+    addChargeTimeButton.style.display = "block";
+    lightDiv.style.visibility = "visible";
+}
+
+var charges = 10;
+
+function useCharge() {
+    lightDiv.style.backgroundColor = "green";
+    charges--;
+    lightDiv.innerHTML = charges;
+}
+
+function stopCharge() {
+    lightDiv.style.backgroundColor = "red";
+}
+
+function addCharge() {
+    charges++;
+    lightDiv.innerHTML = charges;
+}
+
 function preLogInToFirebase() {
     usernameInput.style.visibility = "visible";
     passwordInput.style.visibility = "visible";
@@ -63,7 +88,7 @@ function preLogInToFirebase() {
     preCreateUserButton.style.display = "none";
     firebaseCreateUserButton.style.display = "none";
     firebaseForgotPassButton.style.display = "block";
-};
+}
 
 function logInToFirebase() {
     var email = document.getElementById("usernameInput").value;
@@ -72,6 +97,7 @@ function logInToFirebase() {
     usernameInput.style.visibility = "hidden";
     passwordInput.style.visibility = "hidden";
     firebaseForgotPassButton.style.visibility = "hidden";
+    enterChargeModeButton.style.display = "block";
     firebaseLogOutButton.style.display = "block";
     firebaseLogInButton.style.display = "none";
     firebaseCreateUserButton.style.display = "none";
@@ -108,6 +134,8 @@ function logInToFirebase() {
                 "Welcome User : " + email_id + "<br/> Verification status : " + email_verified;
         }
 
+        useChargeTimeButton.style.display = "block";
+        addChargeTimeButton.style.display = "block";
         if (email_verified != false) {
 
             document.getElementById("verificationButton").style.display = "none";
@@ -116,7 +144,7 @@ function logInToFirebase() {
 
             document.getElementById("verificationButton").style.display = "block";
         }
-    }, (700));
+    }, (1000));
 }
 
 function logOutOfFirebase() {
@@ -131,6 +159,10 @@ function logOutOfFirebase() {
     preLogInButton.style.display = "block";
     preCreateUserButton.style.display = "block";
     firebaseForgotPassButton.style.display = "block";
+    useChargeTimeButton.style.display = "none";
+    stopChargeTimeButton.style.display = "none";
+    addChargeTimeButton.style.display = "none";
+    lightDiv.style.visibility = "hidden";
 }
 
 function forgotPass() {
@@ -236,6 +268,94 @@ userparaDiv.style.padding = "2vh 0";
 userparaDiv.style.fontSize = "3vw";
 document.getElementById("backgroundDiv").appendChild(userparaDiv);
 
+var lightDiv = document.createElement(`div`);
+lightDiv.innerHTML = charges;
+lightDiv.style.visibility = "hidden";
+lightDiv.style.padding = "2vw";
+lightDiv.style.backgroundColor = "blue";
+lightDiv.style.color = "yellow";
+lightDiv.style.fontSize = "5vw";
+document.getElementById("backgroundDiv").appendChild(lightDiv);
+
+var enterChargeModeButton = document.createElement(`button`);
+enterChargeModeButton.innerHTML = "Charge";
+enterChargeModeButton.id = "chargeModeButton";
+enterChargeModeButton.style.display = "none";
+enterChargeModeButton.style.margin = "auto";
+enterChargeModeButton.style.width = "80vw";
+enterChargeModeButton.style.padding = "2.5vh 0";
+enterChargeModeButton.style.borderRadius = "20px";
+enterChargeModeButton.style.fontSize = "5vw";
+enterChargeModeButton.style.fontFamily = "Helvetica";
+enterChargeModeButton.style.color = "#ffffff";
+enterChargeModeButton.style.backgroundColor = "#bebebe";
+enterChargeModeButton.onclick = chargeMode;
+document.getElementById("backgroundDiv").appendChild(enterChargeModeButton);
+
+var useChargeTimeButton = document.createElement(`button`);
+useChargeTimeButton.innerHTML = "Use charge";
+useChargeTimeButton.id = "useChargeButton";
+useChargeTimeButton.style.display = "none";
+useChargeTimeButton.style.margin = "auto";
+useChargeTimeButton.style.width = "80vw";
+useChargeTimeButton.style.padding = "2.5vh 0";
+useChargeTimeButton.style.borderRadius = "20px";
+useChargeTimeButton.style.fontSize = "3vw";
+useChargeTimeButton.style.fontSize = "5vw";
+useChargeTimeButton.style.fontFamily = "Helvetica";
+useChargeTimeButton.style.color = "#ffffff";
+useChargeTimeButton.style.backgroundColor = "#bebebe";
+useChargeTimeButton.onclick = useCharge;
+document.getElementById("backgroundDiv").appendChild(useChargeTimeButton);
+
+var stopChargeTimeButton = document.createElement(`button`);
+stopChargeTimeButton.innerHTML = "Stop charging";
+stopChargeTimeButton.id = "stopChargeButton";
+stopChargeTimeButton.style.display = "none";
+stopChargeTimeButton.style.margin = "auto";
+stopChargeTimeButton.style.width = "80vw";
+stopChargeTimeButton.style.padding = "2.5vh 0";
+stopChargeTimeButton.style.borderRadius = "20px";
+stopChargeTimeButton.style.fontSize = "3vw";
+stopChargeTimeButton.style.fontSize = "5vw";
+stopChargeTimeButton.style.fontFamily = "Helvetica";
+stopChargeTimeButton.style.color = "#ffffff";
+stopChargeTimeButton.style.backgroundColor = "#bebebe";
+stopChargeTimeButton.onclick = stopCharge;
+document.getElementById("backgroundDiv").appendChild(stopChargeTimeButton);
+
+var addChargeTimeButton = document.createElement(`button`);
+addChargeTimeButton.innerHTML = "Add charge";
+addChargeTimeButton.id = "addChargeButton";
+addChargeTimeButton.style.display = "none";
+addChargeTimeButton.style.margin = "auto";
+addChargeTimeButton.style.width = "80vw";
+addChargeTimeButton.style.padding = "2.5vh 0";
+addChargeTimeButton.style.borderRadius = "20px";
+addChargeTimeButton.style.fontSize = "3vw";
+addChargeTimeButton.style.fontSize = "5vw";
+addChargeTimeButton.style.fontFamily = "Helvetica";
+addChargeTimeButton.style.color = "#ffffff";
+addChargeTimeButton.style.backgroundColor = "#bebebe";
+addChargeTimeButton.onclick = addCharge;
+document.getElementById("backgroundDiv").appendChild(addChargeTimeButton);
+
+var firebaseAuthenticationButton = document.createElement(`button`);
+firebaseAuthenticationButton.innerHTML = "Send verification";
+firebaseAuthenticationButton.id = "verificationButton";
+firebaseAuthenticationButton.style.display = "none";
+firebaseAuthenticationButton.style.margin = "auto";
+firebaseAuthenticationButton.style.width = "80vw";
+firebaseAuthenticationButton.style.padding = "2.5vh 0";
+firebaseAuthenticationButton.style.borderRadius = "20px";
+firebaseAuthenticationButton.style.fontSize = "3vw";
+firebaseAuthenticationButton.style.fontSize = "5vw";
+firebaseAuthenticationButton.style.fontFamily = "Helvetica";
+firebaseAuthenticationButton.style.color = "#ffffff";
+firebaseAuthenticationButton.style.backgroundColor = "#bebebe";
+firebaseAuthenticationButton.onclick = send_verification;
+document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButton);
+
 var preLogInButton = document.createElement(`div`);
 preLogInButton.innerHTML = "Log in";
 preLogInButton.id = "logInInput";
@@ -323,15 +443,6 @@ firebaseLogOutButton.style.color = "#ffffff";
 firebaseLogOutButton.style.backgroundColor = "#bebebe";
 firebaseLogOutButton.onclick = logOutOfFirebase;
 document.getElementById("backgroundDiv").appendChild(firebaseLogOutButton);
-
-var firebaseAuthenticationButton = document.createElement(`button`);
-firebaseAuthenticationButton.innerHTML = "Send verification";
-firebaseAuthenticationButton.id = "verificationButton";
-firebaseAuthenticationButton.style.display = "none";
-firebaseAuthenticationButton.style.margin = "auto";
-firebaseAuthenticationButton.style.fontSize = "3vw";
-firebaseAuthenticationButton.onclick = send_verification;
-document.getElementById("backgroundDiv").appendChild(firebaseAuthenticationButton);
 
 var firebaseEnterAnonButton = document.createElement(`div`);
 firebaseEnterAnonButton.innerHTML = "Or enter without log in";
