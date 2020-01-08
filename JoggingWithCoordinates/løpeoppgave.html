@@ -71,7 +71,6 @@
             let timeInMinutes = timeInSeconds / 60;
             let timeInHours = timeInMinutes / 60;
             let kmH = intervalValue / timeInHours;
-            //en av disse...
 
             //let estLat = ((lat2 - lat1) * 2) + lat2 * 1;
             //let estLon = ((lon2 - lon1) * 2) + lon2 * 1;
@@ -81,7 +80,6 @@
             //let lonChangePerSecond = kmhToLon / timeInSeconds;
             let estLatPrSec = (lat2 - lat1) / timeInSeconds;
             let estlonPrSec = (lon2 - lon1) / timeInSeconds;
-            //...tror jeg
 
             //profesjonalitet (ikke implimentert enda)
             let experience = [ 1, 0.9, 0.8, 0.7, 0.6, 0.5 ];
@@ -91,6 +89,7 @@
             //rein (ikke implimentert enda)
             let rainGauge = [1, 0.85, 0.70, 0.55];
             let clearWeather = rainGauge[0], drizzle = rainGauge[1], rain = rainGauge[2], downpour = rainGauge[3];
+
             text += `<tr><th>${lat1}</th><th>${lon1}</th><th>${ele1}</th><th>${timeInSeconds}</th><th>${intervalValue}</th><th>${kmH}</th><th>${estLatPrSec}</th><th>${estlonPrSec}</th></tr>`;
         }
         let distanceDiv = document.createElement("div");
