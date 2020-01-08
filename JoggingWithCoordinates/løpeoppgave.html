@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="testdata.js"></script>
+    <script>
+
+        let parser = new DOMParser();
+        let xmlDoc = parser.parseFromString(gpx, "text/xml");
+        let trekPoints = xmlDoc.getElementsByTagName('trkpt');
+        let initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
+        let text = '';
+        let finalValueInKm = 0;
+
+        function calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2) {
+            if ((lat1 == lat2) && (lon1 == lon2) && (ele1 == ele2)) {
+                return 0;
+            }
+            else {
+                let radlat1 = Math.PI * lat1 / 180;
+                let radlat2 = Math.PI * lat2 / 180;
+                let theta = lon1 - lon2;
+                let radtheta = Math.PI * theta / 180;
+                let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+                dist *= 1.609344;
+                dist *= 1000;
+                var height;
+                if (ele1 > ele2) {
+                    height = (ele1) - (ele2);
+                } else {
+                    height = (ele2) - (ele1);
+                }
+                if (height == 0) {
+                    dist = dist;
+                }
+                else {
+                    dist = Math.sqrt((dist * dist) + (height * height));
+                }
+                dist /= 1000;
+                return dist;
+            }
+        }
+
+        for (let i = 1; i < trekPoints.length; i++) {
+            let trekPoint1 = trekPoints[i - 1];
+            let trekPoint2 = trekPoints[i];
+            let lat1 = trekPoint1.getAttribute('lat');
+            let lat2 = trekPoint2.getAttribute('lat');
+            let lon1 = trekPoint1.getAttribute('lon');
+            let lon2 = trekPoint2.getAttribute('lon');
+            let children1 = Array.from(trekPoint1.children);
+            let children2 = Array.from(trekPoint2.children);
+            let ele1 = children1.filter(p => p.tagName == 'ele')[0].textContent;
+            let ele2 = children2.filter(p => p.tagName == 'ele')[0].textContent;
+            finalValueInKm += calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2);
+            let intervalValue = calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2);
+            let time1 = Date.parse(children1.filter(p => p.tagName == 'time')[0].textContent);
+            let time2 = Date.parse(children2.filter(p => p.tagName == 'time')[0].textContent);
+            let timeInSeconds = (time2 - time1) / 1000;
+            let timeInMinutes = timeInSeconds / 60;
+            let timeInHours = timeInMinutes / 60;
+            let kmH = intervalValue / timeInHours;
+            //en av disse...
+
+            //let estLat = ((lat2 - lat1) * 2) + lat2 * 1;
+            //let estLon = ((lon2 - lon1) * 2) + lon2 * 1;
+            //let kmhToLat = kmH / 110.574;
+            //let kmhToLon = kmH / (110.574 * Math.cos(lat1));
+            //let latChangePerSecond = kmhToLat / timeInSeconds;
+            //let lonChangePerSecond = kmhToLon / timeInSeconds;
+            let estLatPrSec = (lat2 - lat1) / timeInSeconds;
+            let estlonPrSec = (lon2 - lon1) / timeInSeconds;
+            //...tror jeg
+
+            //profesjonalitet (ikke implimentert enda)
+            let experience = [ 1, 0.9, 0.8, 0.7, 0.6, 0.5 ];
+            let pro = experience[0], expert = experience[1], advanced = experience[2], good = experience[3], novice = experience[4], beginner = experience[5];
+            //slitenhet (ikke implimentert enda)
+            let tiredness = "1~0.75";
+            //rein (ikke implimentert enda)
+            let rainGauge = [1, 0.85, 0.70, 0.55];
+            let clearWeather = rainGauge[0], drizzle = rainGauge[1], rain = rainGauge[2], downpour = rainGauge[3];
+            text += `<tr><th>${lat1}</th><th>${lon1}</th><th>${ele1}</th><th>${timeInSeconds}</th><th>${intervalValue}</th><th>${kmH}</th><th>${estLatPrSec}</th><th>${estlonPrSec}</th></tr>`;
+        }
+        let distanceDiv = document.createElement("div");
+        distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km`;
+        distanceDiv.style.textAlign = "center";
+        distanceDiv.style.fontWeight = "bold";
+        document.body.appendChild(distanceDiv);
+
+        let table = document.createElement("table");
+        let tableHeaders = "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>Sec since checkpoint</th><th>Km since checkpoint</th><th>Km/H</th><th>Latitude per sec</th><th>Longitude per sec</th><tr/>";
+        let emptyHeader = "<tr><th>‎</th></tr>";
+        table.innerHTML = tableHeaders + emptyHeader + text;
+        table.style.border = "1px solid black";
+        table.style.width = "90vw";
+        table.style.margin = "auto";
+        document.body.appendChild(table);
+    </script>
+</body>
+</html>
