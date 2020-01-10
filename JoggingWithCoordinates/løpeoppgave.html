@@ -15,8 +15,9 @@
         let trekPoints = xmlDoc.getElementsByTagName('trkpt');
         console.log(trekPoints.length);
         let initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
-        let text = '';
+        let text = "";
         let finalValueInKm = 0;
+        let hypotenuse = 0;
 
         function calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2) {
             if ((lat1 == lat2) && (lon1 == lon2) && (ele1 == ele2)) {
@@ -46,7 +47,8 @@
                     dist = dist;
                 }
                 else {
-                    dist = Math.sqrt((dist * dist) + (height * height));
+                    hypotenuse = Math.sqrt((dist * dist) + (height * height));
+                    dist = hypotenuse;
                 }
                 dist /= 1000;
                 return dist;
@@ -72,29 +74,26 @@
             let timeInMinutes = (time2 - time1) / 60000;
             let timeInSeconds = (time2 - time1) / 1000;
             let kmH = intervalValue / timeInHours;
-
-            //let estLat = ((lat2 - lat1) * 2) + lat2 * 1;
-            //let estLon = ((lon2 - lon1) * 2) + lon2 * 1;
-            //let kmhToLat = kmH / 110.574;
-            //let kmhToLon = kmH / (110.574 * Math.cos(lat1));
-            //let latChangePerSecond = kmhToLat / timeInSeconds;
-            //let lonChangePerSecond = kmhToLon / timeInSeconds;
             let estLatPrSec = (lat2 - lat1) / timeInSeconds;
             let estlonPrSec = (lon2 - lon1) / timeInSeconds;
-
             //slitenhet
             let tiredness = "1~0.75";
             //profesjonalitet
-            let experience = [1, 0.9, 0.8, 0.7, 0.6, 0.5];
+            let experience = [1, 0.96, 0.88, 0.8, 0.74, 0.68];
             let pro = experience[0], expert = experience[1], advanced = experience[2], good = experience[3], novice = experience[4], beginner = experience[5];
             //rein
-            let rainGauge = [1, 0.85, 0.70, 0.55];
+            let rainGauge = [1, 0.92, 0.84, 0.76];
             let clearWeather = rainGauge[0], sprinkling = rainGauge[1], rain = rainGauge[2], downpour = rainGauge[3];
+            //grader
+            let slopeAngle = (intervalValue * 1000) / hypotenuse;
+            let slopeDegrees = Math.pow(Math.cos(slopeAngle), -1);
 
-            let timeInSecondsWithVariables = timeInSeconds / rain / good;
+            let estimatedTimeInSeconds = timeInSeconds / rain / good;
+            let estimatedTimeInHours = estimatedTimeInSeconds / 3600;
+            let estimatedKmH = intervalValue / estimatedTimeInHours;
+            console.log(estimatedKmH);
 
-            //text += `<tr><th>${lat1}</th><th>${lon1}</th><th>${ele1}</th><th>${Math.round(timeInSecondsWithVariables)}</th><th>${intervalValue}</th><th>${kmH}</th><th>${estLatPrSec}</th><th>${estlonPrSec}</th></tr>`;
-            text += `<tr><th>${lat1}</th><th>${lon1}</th><th>${ele1}</th><th>${Math.round(timeInSeconds)}</th><th>${intervalValue}</th><th>${kmH}</th><th>${estLatPrSec}</th><th>${estlonPrSec}</th></tr>`;
+            text += `<tr><th>${lat1}</th><th>${lon1}</th><th>${ele1}</th><th>${Math.round(timeInSeconds)}</th><th>${Math.round(estimatedTimeInSeconds)}</th><th>${intervalValue}</th><th>${kmH}</th><th>${estLatPrSec}</th><th>${estlonPrSec}</th></tr>`;
         }
         let distanceDiv = document.createElement("div");
         distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km`;
@@ -103,7 +102,7 @@
         document.body.appendChild(distanceDiv);
 
         let table = document.createElement("table");
-        let tableHeaders = "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>Sec since checkpoint</th><th>Km since checkpoint</th><th>Km/H</th><th>Latitude per sec</th><th>Longitude per sec</th><tr/>";
+        let tableHeaders = "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>Sec since checkpoint</th><th>Est sec to checkpoint</th><th>Km since checkpoint</th><th>Km/H</th><th>Latitude per sec</th><th>Longitude per sec</th><tr/>";
         let emptyHeader = "<tr><th>‎</th></tr>";
         table.innerHTML = tableHeaders + emptyHeader + text;
         table.style.border = "1px solid black";
