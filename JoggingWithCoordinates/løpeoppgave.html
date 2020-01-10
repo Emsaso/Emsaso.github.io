@@ -13,7 +13,6 @@
         let parser = new DOMParser();
         let xmlDoc = parser.parseFromString(gpx, "text/xml");
         let trekPoints = xmlDoc.getElementsByTagName('trkpt');
-        console.log(trekPoints.length);
         let initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
         let text = "";
         let finalValueInKm = 0;
@@ -48,11 +47,15 @@
                 }
                 else {
                     hypotenuse = Math.sqrt((dist * dist) + (height * height));
-                    dist = hypotenuse;
+                    //dist = hypotenuse;
                 }
                 dist /= 1000;
                 return dist;
             }
+        }
+
+        function includeObstacles() {
+
         }
 
         for (let i = 1; i < trekPoints.length; i++) {
@@ -73,36 +76,41 @@
             let timeInHours = (time2 - time1) / 3600000;
             let timeInMinutes = (time2 - time1) / 60000;
             let timeInSeconds = (time2 - time1) / 1000;
-            let kmH = intervalValue / timeInHours;
-            let estLatPrSec = (lat2 - lat1) / timeInSeconds;
-            let estlonPrSec = (lon2 - lon1) / timeInSeconds;
+            let kmH = (intervalValue / timeInHours).toFixed(2);
+            let latPrSec = (lat2 - lat1) / timeInSeconds;
+            let lonPrSec = (lon2 - lon1) / timeInSeconds;
             //slitenhet
-            let tiredness = "1~0.75";
+            let tiredness = 0.9;
             //profesjonalitet
             let experience = [1, 0.96, 0.88, 0.8, 0.74, 0.68];
             let pro = experience[0], expert = experience[1], advanced = experience[2], good = experience[3], novice = experience[4], beginner = experience[5];
-            //rein
+            //vær
             let rainGauge = [1, 0.92, 0.84, 0.76];
             let clearWeather = rainGauge[0], sprinkling = rainGauge[1], rain = rainGauge[2], downpour = rainGauge[3];
             //grader
-            let slopeAngle = (intervalValue * 1000) / hypotenuse;
-            let slopeDegrees = Math.pow(Math.cos(slopeAngle), -1);
+            let slopeAngle = (hypotenuse / intervalValue * 1000) / (ele2 - ele1);
+            let slopeDegrees = Math.pow(Math.cos(slopeAngle), -1).toFixed(2);
 
-            let estimatedTimeInSeconds = timeInSeconds / rain / good;
-            let estimatedTimeInHours = estimatedTimeInSeconds / 3600;
-            let estimatedKmH = intervalValue / estimatedTimeInHours;
-            console.log(estimatedKmH);
+            // bruk slitenhet, proffesjonalitet, vær og grader for å påvirke speedVariables
+            let speedVariables = tiredness / good / rain;
 
-            text += `<tr><th>${lat1}</th><th>${lon1}</th><th>${ele1}</th><th>${Math.round(timeInSeconds)}</th><th>${Math.round(estimatedTimeInSeconds)}</th><th>${intervalValue}</th><th>${kmH}</th><th>${estLatPrSec}</th><th>${estlonPrSec}</th></tr>`;
+            let estimatedTimeInSeconds = timeInSeconds * speedVariables;
+            let estimatedKmH = (kmH / speedVariables).toFixed(2);
+            let estimatedLatitude = latPrSec / speedVariables;
+            let estimatedLongitude = lonPrSec / speedVariables;
+
+            text += `<tr><th>${parseFloat(lat1).toFixed(8)}</th><th>${parseFloat(lon1).toFixed(8)}</th><th>${ele1}</th><th>${timeInSeconds.toFixed(2)}</th>` +
+                `<th>${intervalValue.toFixed(6)}</th><th>${kmH}</th><th>${parseFloat(latPrSec).toFixed(8)}</th><th>${parseFloat(lonPrSec).toFixed(8)}</th>` +
+                `<th>${estimatedTimeInSeconds.toFixed(2)}</th><th>${estimatedKmH}</th><th>${slopeDegrees}&deg;</th><th>${estimatedLatitude.toFixed(8)}</th><th>${estimatedLongitude.toFixed(8)}</th></tr>`;
         }
         let distanceDiv = document.createElement("div");
-        distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km`;
+        distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km, Table length: ${trekPoints.length}`;
         distanceDiv.style.textAlign = "center";
         distanceDiv.style.fontWeight = "bold";
         document.body.appendChild(distanceDiv);
 
         let table = document.createElement("table");
-        let tableHeaders = "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>Sec since checkpoint</th><th>Est sec to checkpoint</th><th>Km since checkpoint</th><th>Km/H</th><th>Latitude per sec</th><th>Longitude per sec</th><tr/>";
+        let tableHeaders = "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>S/Cp</th><th>Km/Cp</th><th>Km/H</th><th>Latitude/S</th><th>Longitude/S</th><th>Est S/Cp</th><th>Est Km/H</th><th>Est &deg;</th><th>Est Latitude/S</th><th>Est Longitude/S</th><tr/>";
         let emptyHeader = "<tr><th>‎</th></tr>";
         table.innerHTML = tableHeaders + emptyHeader + text;
         table.style.border = "1px solid black";
