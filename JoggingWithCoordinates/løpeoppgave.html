@@ -1,15 +1,16 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
+
 <body>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="testdata.js"></script>
     <script>
-
         let parser = new DOMParser();
         let xmlDoc = parser.parseFromString(gpx, "text/xml");
         let trekPoints = xmlDoc.getElementsByTagName('trkpt');
@@ -18,47 +19,19 @@
         let finalValueInKm = 0;
         let hypotenuse = 0;
 
-        function calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2) {
-            if ((lat1 == lat2) && (lon1 == lon2) && (ele1 == ele2)) {
-                return 0;
-            }
-            else {
-                let radlat1 = Math.PI * lat1 / 180;
-                let radlat2 = Math.PI * lat2 / 180;
-                let theta = lon1 - lon2;
-                let radtheta = Math.PI * theta / 180;
-                let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-                if (dist > 1) {
-                    dist = 1;
-                }
-                dist = Math.acos(dist);
-                dist = dist * 180 / Math.PI;
-                dist = dist * 60 * 1.1515;
-                dist *= 1.609344;
-                dist *= 1000;
-                var height;
-                if (ele1 > ele2) {
-                    height = (ele1) - (ele2);
-                } else {
-                    height = (ele2) - (ele1);
-                }
-                if (height == 0) {
-                    dist = dist;
-                }
-                else {
-                    hypotenuse = Math.sqrt((dist * dist) + (height * height));
-                    //dist = hypotenuse;
-                }
-                dist /= 1000;
-                return dist;
-            }
-        }
-
-        function includeObstacles() {
-
-        }
-
         for (let i = 1; i < trekPoints.length; i++) {
+            let values = getLatLon(i);
+            let latitude = values[0];
+            let longitude = values[1];
+            if (isNaN(latitude) || isNaN(longitude)) {
+                
+            } else {
+                console.log(latitude, longitude);
+            }
+        }
+
+
+        function getLatLon(i) {
             let trekPoint1 = trekPoints[i - 1];
             let trekPoint2 = trekPoints[i];
             let lat1 = trekPoint1.getAttribute('lat');
@@ -79,44 +52,159 @@
             let kmH = (intervalValue / timeInHours).toFixed(2);
             let latPrSec = (lat2 - lat1) / timeInSeconds;
             let lonPrSec = (lon2 - lon1) / timeInSeconds;
-            //slitenhet
-            let tiredness = 0.9;
-            //profesjonalitet
-            let experience = [1, 0.96, 0.88, 0.8, 0.74, 0.68];
-            let pro = experience[0], expert = experience[1], advanced = experience[2], good = experience[3], novice = experience[4], beginner = experience[5];
-            //vær
-            let rainGauge = [1, 0.92, 0.84, 0.76];
-            let clearWeather = rainGauge[0], sprinkling = rainGauge[1], rain = rainGauge[2], downpour = rainGauge[3];
-            //grader
-            let slopeAngle = (hypotenuse / intervalValue * 1000) / (ele2 - ele1);
-            let slopeDegrees = Math.pow(Math.cos(slopeAngle), -1).toFixed(2);
-
-            // bruk slitenhet, proffesjonalitet, vær og grader for å påvirke speedVariables
-            let speedVariables = tiredness / good / rain;
+            let tiredness = calculateTiredness(i);
+            let experience = calculateProwess("pro");
+            let weather = calculateRain("clearWeather");
+            let steepness = calculateSteepness(ele1, ele2);
+            let speedVariables = tiredness / experience / weather * steepness;
 
             let estimatedTimeInSeconds = timeInSeconds * speedVariables;
             let estimatedKmH = (kmH / speedVariables).toFixed(2);
             let estimatedLatitude = latPrSec / speedVariables;
             let estimatedLongitude = lonPrSec / speedVariables;
 
-            text += `<tr><th>${parseFloat(lat1).toFixed(8)}</th><th>${parseFloat(lon1).toFixed(8)}</th><th>${ele1}</th><th>${timeInSeconds.toFixed(2)}</th>` +
-                `<th>${intervalValue.toFixed(6)}</th><th>${kmH}</th><th>${parseFloat(latPrSec).toFixed(8)}</th><th>${parseFloat(lonPrSec).toFixed(8)}</th>` +
-                `<th>${estimatedTimeInSeconds.toFixed(2)}</th><th>${estimatedKmH}</th><th>${slopeDegrees}&deg;</th><th>${estimatedLatitude.toFixed(8)}</th><th>${estimatedLongitude.toFixed(8)}</th></tr>`;
+            // text +=
+            //     `<tr><th>${parseFloat(lat1).toFixed(7)}</th><th>${parseFloat(lon1).toFixed(7)}</th><th>${ele1}</th><th>${timeInSeconds.toFixed(2)}</th>` +
+            //     `<th>${kmH}</th><th>${parseFloat(latPrSec).toFixed(7)}</th><th>${parseFloat(lonPrSec).toFixed(7)}</th><th>${estimatedTimeInSeconds.toFixed(2)}</th>` +
+            //     `<th>${estimatedKmH}</th><th>${estimatedLatitude.toFixed(7)}</th><th>${estimatedLongitude.toFixed(7)}</th></tr>`;
+            //         let latAndLon = estimatedLatitude.toFixed(7) + " " + estimatedLongitude.toFixed(7);
+            return [estimatedLatitude, estimatedLongitude];
         }
-        let distanceDiv = document.createElement("div");
-        distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km, Table length: ${trekPoints.length}`;
-        distanceDiv.style.textAlign = "center";
-        distanceDiv.style.fontWeight = "bold";
-        document.body.appendChild(distanceDiv);
 
-        let table = document.createElement("table");
-        let tableHeaders = "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>S/Cp</th><th>Km/Cp</th><th>Km/H</th><th>Latitude/S</th><th>Longitude/S</th><th>Est S/Cp</th><th>Est Km/H</th><th>Est &deg;</th><th>Est Latitude/S</th><th>Est Longitude/S</th><tr/>";
-        let emptyHeader = "<tr><th>‎</th></tr>";
-        table.innerHTML = tableHeaders + emptyHeader + text;
-        table.style.border = "1px solid black";
-        table.style.width = "90vw";
-        table.style.margin = "auto";
-        document.body.appendChild(table);
+        function calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2) {
+            if ((lat1 == lat2) && (lon1 == lon2) && (ele1 == ele2)) {
+                return 0;
+            } else {
+                let radlat1 = Math.PI * lat1 / 180;
+                let radlat2 = Math.PI * lat2 / 180;
+                let theta = lon1 - lon2;
+                let radtheta = Math.PI * theta / 180;
+                let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(
+                    radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180 / Math.PI;
+                dist = dist * 60 * 1.1515;
+                dist *= 1.609344;
+                dist *= 1000;
+                var height;
+                if (ele1 > ele2) {
+                    height = (ele1) - (ele2);
+                } else {
+                    height = (ele2) - (ele1);
+                }
+                if (height == 0) {
+                    dist = dist;
+                } else {
+                    hypotenuse = Math.sqrt((dist * dist) + (height * height));
+                }
+                dist /= 1000;
+                return dist;
+            }
+        }
+
+        function calculateTiredness(i) {
+            let value = 10;
+            let tiredness = (((i / trekPoints.length) / (i / trekPoints.length + value)) + 1);
+            return tiredness
+        }
+
+        function calculateProwess(experience) {
+            let prowess;
+            switch (experience) {
+                case "beginner":
+                    prowess = 0.85
+                    break;
+                case "novice":
+                    prowess = 0.88
+                    break;
+                case "good":
+                    prowess = 0.91
+                    break;
+                case "advanced":
+                    prowess = 0.94
+                    break;
+                case "experienced":
+                    prowess = 0.97
+                    break;
+                case "pro":
+                    prowess = 1
+                    break;
+                default:
+                    prowess = 1;
+            }
+            return prowess
+        }
+
+        function calculateRain(rainGauge) {
+            let weather;
+            switch (rainGauge) {
+                case "downpour":
+                    weather = 0.85;
+                    break;
+                case "rain":
+                    weather = 0.90;
+                    break;
+                case "sprinkling":
+                    weather = 0.95;
+                    break;
+                case "clearWeather":
+                    weather = 1;
+                    break;
+                default:
+                    weather = 1;
+            }
+            return weather
+        }
+
+        function calculateSteepness(ele1, ele2) {
+            let steepness = ((ele2 - ele1) / ele2) + 1;
+            return steepness
+        }
+        // let distanceDiv = document.createElement("div");
+        // distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km, Total rows: ${trekPoints.length}`;
+        // distanceDiv.style.textAlign = "center";
+        // distanceDiv.style.fontWeight = "bold";
+        // document.body.appendChild(distanceDiv);
+
+        // let colorCodeDiv = document.createElement("div");
+        // colorCodeDiv.innerHTML =
+        //     "<span style='color: red;'>Red</span> is initial values. <span style='color: green;'>Green</span> is optimal values per second. <span style='color: blue;'>Blue</span> is expected values per second."
+        // colorCodeDiv.style.textAlign = "center";
+        // colorCodeDiv.style.fontWeight = "bold";
+        // document.body.appendChild(colorCodeDiv)
+
+        // let keywordExplanationDiv = document.createElement("div");
+        // keywordExplanationDiv.innerHTML =
+        //     "S/Cp is 'Seconds per Checkpoint'. Km/H is 'Kilometers per Hour'. Latitude or Longitude/S is 'Longitude/Latitude per second'"
+        // keywordExplanationDiv.style.textAlign = "center";
+        // keywordExplanationDiv.style.fontWeight = "bold";
+        // document.body.appendChild(keywordExplanationDiv);
+
+        // let table = document.createElement("table");
+        // let tableHeaders =
+        //     "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>S/Cp</th><th>Km/H</th><th>Latitude/S</th><th>Longitude/S</th><th>S/Cp</th><th>Km/H</th><th>Latitude/S</th><th>Longitude/S</th><tr/>";
+        // let emptyHeader = "<tr><th>‎</th></tr>";
+        // table.innerHTML = tableHeaders + emptyHeader + text;
+        // table.style.border = "1px solid black";
+        // table.style.width = "90vw";
+        // table.style.margin = "auto";
+        // document.body.appendChild(table);
+        // for (let i = 0; i < 11; i++) {
+        //     var th = document.getElementsByTagName("th")[i];
+        //     if (i < 3) {
+        //         th.style.color = "red";
+        //     } else if (i < 7) {
+        //         th.style.color = "green";
+        //     } else if (i < 11) {
+        //         th.style.color = "blue";
+        //     } else {
+        //         th.style.color = "black";
+        //     }
+        // }
     </script>
 </body>
+
 </html>
