@@ -13,27 +13,39 @@
     <script>
         let parser = new DOMParser();
         let xmlDoc = parser.parseFromString(gpx, "text/xml");
+        let trekStart = xmlDoc.getElementsByTagName('time');
         let trekPoints = xmlDoc.getElementsByTagName('trkpt');
         let initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
         let text = "";
         let finalValueInKm = 0;
         let hypotenuse = 0;
-
-        for (let i = 1; i < trekPoints.length; i++) {
-            let values = getLatLon(i);
-            let latitude = values[0];
-            let longitude = values[1];
-            if (isNaN(latitude) || isNaN(longitude)) {
-                
-            } else {
-                console.log(latitude, longitude);
-            }
-        }
-
+        let i = 0;
+        var y = 0;
+        let estTimeSec = 1;
+            let timer = setInterval(() => {
+                let values = getLatLon(i);
+                let latitude = values[0];
+                let longitude = values[1];
+                if (!isNaN(latitude) || !isNaN(longitude)) {
+                    console.log(estTimeSec.toFixed(2), latitude, longitude);
+                    // console.log(estTimeSec.toFixed(2));
+                }
+                i++;
+                if (i >= trekPoints.length - 1) {
+                    clearInterval(timer);
+                }
+            }, estTimeSec * 1);
+        //dette checkPointet sin tid * 1000
 
         function getLatLon(i) {
-            let trekPoint1 = trekPoints[i - 1];
-            let trekPoint2 = trekPoints[i];
+            let initTimeModified = initTime.slice(0, -10);
+            initTimeModified = initTimeModified.split("-");
+            let secondsSinceStart = initTimeModified[1] + "/" + initTimeModified[2] + "/" + initTimeModified[0];
+            let correctTime = (parseInt(new Date(secondsSinceStart).getTime()) + i - parseInt(new Date(
+                secondsSinceStart).getTime()));
+            // console.log(parseInt(correctTime));
+            let trekPoint1 = trekPoints[parseInt(correctTime)];
+            let trekPoint2 = trekPoints[parseInt(correctTime + 1)];
             let lat1 = trekPoint1.getAttribute('lat');
             let lat2 = trekPoint2.getAttribute('lat');
             let lon1 = trekPoint1.getAttribute('lon');
@@ -52,23 +64,27 @@
             let kmH = (intervalValue / timeInHours).toFixed(2);
             let latPrSec = (lat2 - lat1) / timeInSeconds;
             let lonPrSec = (lon2 - lon1) / timeInSeconds;
-            let tiredness = calculateTiredness(i);
+            let tiredness = calculateTiredness(correctTime);
             let experience = calculateProwess("pro");
             let weather = calculateRain("clearWeather");
             let steepness = calculateSteepness(ele1, ele2);
             let speedVariables = tiredness / experience / weather * steepness;
 
             let estimatedTimeInSeconds = timeInSeconds * speedVariables;
+            estTimeSec = estimatedTimeInSeconds;
+
             let estimatedKmH = (kmH / speedVariables).toFixed(2);
             let estimatedLatitude = latPrSec / speedVariables;
             let estimatedLongitude = lonPrSec / speedVariables;
-
+            let finalLatitude = lat1 - estimatedLatitude;
+            let finalLongitute = lon1 - estimatedLongitude;
             // text +=
             //     `<tr><th>${parseFloat(lat1).toFixed(7)}</th><th>${parseFloat(lon1).toFixed(7)}</th><th>${ele1}</th><th>${timeInSeconds.toFixed(2)}</th>` +
             //     `<th>${kmH}</th><th>${parseFloat(latPrSec).toFixed(7)}</th><th>${parseFloat(lonPrSec).toFixed(7)}</th><th>${estimatedTimeInSeconds.toFixed(2)}</th>` +
             //     `<th>${estimatedKmH}</th><th>${estimatedLatitude.toFixed(7)}</th><th>${estimatedLongitude.toFixed(7)}</th></tr>`;
             //         let latAndLon = estimatedLatitude.toFixed(7) + " " + estimatedLongitude.toFixed(7);
-            return [estimatedLatitude, estimatedLongitude];
+            return [finalLatitude, finalLongitute];
+            // return [estimatedLatitude, estimatedLongitude];
         }
 
         function calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2) {
