@@ -27,15 +27,19 @@
         let totSeconds = 0;
         let totMinutes = 0;
         let totHours = 0;
-        if (totSeconds >= 60) {
-            totMinutes++;
-            totSeconds = 0;
+
+        function calculateTime() {
+            if (totSeconds >= 60) {
+                totMinutes++;
+                totSeconds = 0;
+            }
+            if (totMinutes >= 60) {
+                totHours++;
+                totMinutes = 0;
+            }
+            z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" +
+                totSeconds).slice(-2);
         }
-        if (totMinutes >= 60) {
-            totHours++;
-            totMinutes = 0;
-        }
-        z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" + totSeconds).slice(-2);
         getLatLon(i);
         run();
         run2();
@@ -47,23 +51,22 @@
                 let longitude = coordinates[1];
                 i++;
                 totSeconds++;
-                z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" + totSeconds)
-                    .slice(-2);
+                calculateTime();
                 if (!isNaN(latitude) || !isNaN(longitude)) {
                     console.log(z, latitude, longitude);
                 }
-                if (i >= trekPoints.length / 2) {
+                if (i >= trekPoints.length - 4) {
                     clearInterval(timer);
                 } else {
                     clearInterval(timer);
-                    run();
                     run2();
+                    run();
                 }
             }, estTimeSec2 * 1000);
         }
 
         function run2() {
-            if (i + 1 >= 1 && i + 1 <= trekPoints.length) {
+            if (i + 1 >= 1 && i + y <= trekPoints.length) {
                 let timer2 = setInterval(() => {
                     coordinates2 = getLatLon(i + 1);
                     latitude2 = coordinates2[0];
@@ -73,16 +76,16 @@
                     longitude1 = coordinates1[1];
                     y++;
                     totSeconds++;
-                    z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" + totSeconds).slice(-2);
+                    calculateTime();
                     let currentLat = latitude1 + ((latitude2 - latitude1) / estTimeSec * y);
                     let currentLon = longitude1 + ((longitude2 - longitude1) / estTimeSec * y);
                     console.log("\t" + z, currentLat, currentLon);
-                    if (y >= Math.round(estTimeSec) - 1) {
+                    if (y >= Math.round(estTimeSec)) {
                         clearInterval(timer2);
                         y = 0;
                     }
                 }, 1000);
-            }
+            } 
         }
 
         function getLatLon(i) {
