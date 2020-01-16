@@ -8,6 +8,8 @@
 </head>
 
 <body>
+    <div id="result"></div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="testdata.js"></script>
     <script>
@@ -27,24 +29,20 @@
         let totSeconds = 0;
         let totMinutes = 0;
         let totHours = 0;
+        let latitudeEnd = 0;
+        let longitudeEnd = 0;
+        let result = document.getElementById("result");
+        result.innerHTML = `${latitudeEnd} ${longitudeEnd}`
+        document.body.appendChild(result);
 
-        function calculateTime() {
-            if (totSeconds >= 60) {
-                totMinutes++;
-                totSeconds = 0;
-            }
-            if (totMinutes >= 60) {
-                totHours++;
-                totMinutes = 0;
-            }
-            z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" +
-                totSeconds).slice(-2);
-        }
-        getLatLon(i);
         run();
-        run2();
-
         function run() {
+            getLatLon(i);
+            getLatLonEveryCheckpoint();
+            getLatLonEverySecond();
+        }
+
+        function getLatLonEveryCheckpoint() {
             let timer = setInterval(() => {
                 let coordinates = getLatLon(i);
                 let latitude = coordinates[0];
@@ -59,13 +57,16 @@
                     clearInterval(timer);
                 } else {
                     clearInterval(timer);
-                    run2();
-                    run();
+                    getLatLonEverySecond();
+                    getLatLonEveryCheckpoint();
+                    latitudeEnd = latitude;
+                    longitudeEnd = longitude;
+                    result.innerHTML = `${latitudeEnd} ${longitudeEnd}`
                 }
             }, estTimeSec2 * 1000);
         }
 
-        function run2() {
+        function getLatLonEverySecond() {
             if (i + 1 >= 1 && i + y <= trekPoints.length) {
                 let timer2 = setInterval(() => {
                     coordinates2 = getLatLon(i + 1);
@@ -77,15 +78,18 @@
                     y++;
                     totSeconds++;
                     calculateTime();
-                    let currentLat = latitude1 + ((latitude2 - latitude1) / estTimeSec * y);
-                    let currentLon = longitude1 + ((longitude2 - longitude1) / estTimeSec * y);
-                    console.log("\t" + z, currentLat, currentLon);
-                    if (y >= Math.round(estTimeSec)) {
+                    let latitude = latitude1 + ((latitude2 - latitude1) / estTimeSec * y);
+                    let longitude = longitude1 + ((longitude2 - longitude1) / estTimeSec * y);
+                    console.log("\t" + z, latitude, longitude);
+                    latitudeEnd = latitude;
+                    longitudeEnd = longitude;
+                    result.innerHTML = `${latitudeEnd} ${longitudeEnd}`
+                    if (y >= Math.floor(estTimeSec) - 1) {
                         clearInterval(timer2);
                         y = 0;
                     }
                 }, 1000);
-            } 
+            }
         }
 
         function getLatLon(i) {
@@ -151,6 +155,19 @@
             //         let latAndLon = estimatedLatitude.toFixed(7) + " " + estimatedLongitude.toFixed(7);
             return [finalLatitude, finalLongitute];
             // return [estimatedLatitude, estimatedLongitude];
+        }
+
+        function calculateTime() {
+            if (totSeconds >= 60) {
+                totMinutes++;
+                totSeconds = 0;
+            }
+            if (totMinutes >= 60) {
+                totHours++;
+                totMinutes = 0;
+            }
+            z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" +
+                totSeconds).slice(-2);
         }
 
         function calculateDistance(lat1, lon1, ele1, lat2, lon2, ele2) {
