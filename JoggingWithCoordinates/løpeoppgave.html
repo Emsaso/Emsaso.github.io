@@ -22,10 +22,20 @@
         let hypotenuse = 0;
         let i = 0;
         let y = 0;
-        let z = 0;
         let estTimeSec = 0;
         let estTimeSec2 = 0;
-
+        let totSeconds = 0;
+        let totMinutes = 0;
+        let totHours = 0;
+        if (totSeconds >= 60) {
+            totMinutes++;
+            totSeconds = 0;
+        }
+        if (totMinutes >= 60) {
+            totHours++;
+            totMinutes = 0;
+        }
+        z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" + totSeconds).slice(-2);
         getLatLon(i);
         run();
         run2();
@@ -35,10 +45,13 @@
                 let coordinates = getLatLon(i);
                 let latitude = coordinates[0];
                 let longitude = coordinates[1];
-                if (!isNaN(latitude) || !isNaN(longitude)) {
-                    console.log(estTimeSec.toFixed(2), latitude, longitude);
-                }
                 i++;
+                totSeconds++;
+                z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" + totSeconds)
+                    .slice(-2);
+                if (!isNaN(latitude) || !isNaN(longitude)) {
+                    console.log(z, latitude, longitude);
+                }
                 if (i >= trekPoints.length / 2) {
                     clearInterval(timer);
                 } else {
@@ -59,9 +72,11 @@
                     latitude1 = coordinates1[0];
                     longitude1 = coordinates1[1];
                     y++;
+                    totSeconds++;
+                    z = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" + totSeconds).slice(-2);
                     let currentLat = latitude1 + ((latitude2 - latitude1) / estTimeSec * y);
                     let currentLon = longitude1 + ((longitude2 - longitude1) / estTimeSec * y);
-                    console.log("\t" + y + ".00", currentLat, currentLon);
+                    console.log("\t" + z, currentLat, currentLon);
                     if (y >= Math.round(estTimeSec) - 1) {
                         clearInterval(timer2);
                         y = 0;
