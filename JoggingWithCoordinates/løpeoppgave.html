@@ -102,7 +102,6 @@
                 secondsSinceStart).getTime()));
             let correctTime2 = (parseInt(new Date(secondsSinceStart2).getTime()) + (i + 1) - parseInt(new Date(
                 secondsSinceStart2).getTime()));
-            // console.log(parseInt(correctTime));
             let trekPoint1 = trekPoints[parseInt(correctTime)];
             let trekPoint2 = trekPoints[parseInt(correctTime + 1)];
             let trekPoint12 = trekPoints[parseInt(correctTime2)];
@@ -147,13 +146,7 @@
             let estimatedLongitude = lonPrSec / speedVariables;
             let finalLatitude = lat1 - estimatedLatitude;
             let finalLongitute = lon1 - estimatedLongitude;
-            // text +=
-            //     `<tr><th>${parseFloat(lat1).toFixed(7)}</th><th>${parseFloat(lon1).toFixed(7)}</th><th>${ele1}</th><th>${timeInSeconds.toFixed(2)}</th>` +
-            //     `<th>${kmH}</th><th>${parseFloat(latPrSec).toFixed(7)}</th><th>${parseFloat(lonPrSec).toFixed(7)}</th><th>${estimatedTimeInSeconds.toFixed(2)}</th>` +
-            //     `<th>${estimatedKmH}</th><th>${estimatedLatitude.toFixed(7)}</th><th>${estimatedLongitude.toFixed(7)}</th></tr>`;
-            //         let latAndLon = estimatedLatitude.toFixed(7) + " " + estimatedLongitude.toFixed(7);
             return [finalLatitude, finalLongitute];
-            // return [estimatedLatitude, estimatedLongitude];
         }
 
         function calculateTime() {
@@ -261,47 +254,6 @@
             let steepness = ((ele2 - ele1) / ele2) + 1;
             return steepness
         }
-        // let distanceDiv = document.createElement("div");
-        // distanceDiv.innerHTML = `Total kilometers: ${finalValueInKm.toFixed(3)} km, Total rows: ${trekPoints.length}`;
-        // distanceDiv.style.textAlign = "center";
-        // distanceDiv.style.fontWeight = "bold";
-        // document.body.appendChild(distanceDiv);
-
-        // let colorCodeDiv = document.createElement("div");
-        // colorCodeDiv.innerHTML =
-        //     "<span style='color: red;'>Red</span> is initial values. <span style='color: green;'>Green</span> is optimal values per second. <span style='color: blue;'>Blue</span> is expected values per second."
-        // colorCodeDiv.style.textAlign = "center";
-        // colorCodeDiv.style.fontWeight = "bold";
-        // document.body.appendChild(colorCodeDiv)
-
-        // let keywordExplanationDiv = document.createElement("div");
-        // keywordExplanationDiv.innerHTML =
-        //     "S/Cp is 'Seconds per Checkpoint'. Km/H is 'Kilometers per Hour'. Latitude or Longitude/S is 'Longitude/Latitude per second'"
-        // keywordExplanationDiv.style.textAlign = "center";
-        // keywordExplanationDiv.style.fontWeight = "bold";
-        // document.body.appendChild(keywordExplanationDiv);
-
-        // let table = document.createElement("table");
-        // let tableHeaders =
-        //     "<tr><th>Latitude</th><th>Longitude</th><th>Elevation</th><th>S/Cp</th><th>Km/H</th><th>Latitude/S</th><th>Longitude/S</th><th>S/Cp</th><th>Km/H</th><th>Latitude/S</th><th>Longitude/S</th><tr/>";
-        // let emptyHeader = "<tr><th>‎</th></tr>";
-        // table.innerHTML = tableHeaders + emptyHeader + text;
-        // table.style.border = "1px solid black";
-        // table.style.width = "90vw";
-        // table.style.margin = "auto";
-        // document.body.appendChild(table);
-        // for (let i = 0; i < 11; i++) {
-        //     var th = document.getElementsByTagName("th")[i];
-        //     if (i < 3) {
-        //         th.style.color = "red";
-        //     } else if (i < 7) {
-        //         th.style.color = "green";
-        //     } else if (i < 11) {
-        //         th.style.color = "blue";
-        //     } else {
-        //         th.style.color = "black";
-        //     }
-        // }
     </script>
 </body>
 
