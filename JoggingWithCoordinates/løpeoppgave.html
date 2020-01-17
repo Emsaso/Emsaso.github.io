@@ -28,17 +28,31 @@
         let totSeconds = 0;
         let totMinutes = 0;
         let totHours = 0;
-        let latitudeEnd = 0;
-        let longitudeEnd = 0;
+        let estLatitude = 0;
+        let estLongitude = 0;
+        
+        //
         let result = document.createElement("div");
-        result.innerHTML = `${latitudeEnd} ${longitudeEnd}`
+        result.innerHTML = `0 0`;
         document.body.appendChild(result);
+
+        let button = document.createElement("button");
+        button.innerHTML = "Get values";
+        button.onclick = function(){result.innerHTML = `${estLatitude} ${estLongitude}`;};
+        document.body.appendChild(button);
+        //
 
         run();
         function run() {
             getLatLon(i);
             getLatLonEveryCheckpoint();
             getLatLonEverySecond();
+        }
+
+        function computeLatLon(){
+            let latitude = estLatitude;
+            let longitude = estLongitude;
+            return [latitude, longitude];
         }
 
         function getLatLonEveryCheckpoint() {
@@ -48,7 +62,7 @@
                 let longitude = coordinates[1];
                 i++;
                 totSeconds++;
-                calculateTime();
+                estimateTime();
                 if (!isNaN(latitude) || !isNaN(longitude)) {
                     console.log(z, latitude, longitude);
                 }
@@ -58,9 +72,8 @@
                     clearInterval(timer);
                     getLatLonEverySecond();
                     getLatLonEveryCheckpoint();
-                    latitudeEnd = latitude;
-                    longitudeEnd = longitude;
-                    result.innerHTML = `${latitudeEnd} ${longitudeEnd}`
+                    estLatitude = latitude;
+                    estLongitude = longitude;
                 }
             }, estTimeSec2 * 1000);
         }
@@ -76,13 +89,12 @@
                     longitude1 = coordinates1[1];
                     y++;
                     totSeconds++;
-                    calculateTime();
+                    estimateTime();
                     let latitude = latitude1 + ((latitude2 - latitude1) / estTimeSec * y);
                     let longitude = longitude1 + ((longitude2 - longitude1) / estTimeSec * y);
                     console.log("\t" + z, latitude, longitude);
-                    latitudeEnd = latitude;
-                    longitudeEnd = longitude;
-                    result.innerHTML = `${latitudeEnd} ${longitudeEnd}`
+                    estLatitude = latitude;
+                    estLongitude = longitude;
                     if (y >= Math.floor(estTimeSec) - 1) {
                         clearInterval(timer2);
                         y = 0;
@@ -149,7 +161,7 @@
             return [finalLatitude, finalLongitute];
         }
 
-        function calculateTime() {
+        function estimateTime() {
             if (totSeconds >= 60) {
                 totMinutes++;
                 totSeconds = 0;
