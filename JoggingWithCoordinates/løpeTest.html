@@ -17,26 +17,12 @@
     <script src="løpeoppgave.js"></script>
     <script>
         // run();
-        QUnit.test("hello test", function (assert) {
-            assert.equal(estLatitude, !isNaN, "Lat is a number!");
-            assert.equal(estLongitude, !isNaN, "Lon is a number!");
-        });
-        QUnit.test("latlon is number", function (assert) {
-            assert.equal(estLatitude, !isNaN, "Lat is a number!");
-            assert.equal(estLongitude, !isNaN, "Lon is a number!");
-        });
-        QUnit.test("latlon is string", function (assert) {
-            assert.equal(estLatitude, String, "Lat is a string!");
-            assert.equal(estLongitude, String, "Lon is a string!");
-        });
-        QUnit.test("latlon is 0", function (assert) {
-            assert.equal(estLatitude, 0, "Lat is a 0!");
-            assert.equal(estLongitude, 0, "Lon is 0!");
-        });
-        QUnit.test("latlon is null", function (assert) {
-            assert.equal(estLatitude, null, "Lat is a null!");
-            assert.equal(estLongitude, null, "Lon is a null!");
-        });
+        for (let i = 0; i < trekPoints.length; i++) {
+            // QUnit.module("group " + i);
+            QUnit.test("hello test", function (assert) {
+                assert.ok(true, getLatLon(i));
+            });
+        }
     </script>
 </body>
 
