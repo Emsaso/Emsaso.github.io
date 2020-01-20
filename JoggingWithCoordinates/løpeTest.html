@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+
+<body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="testdata.js"></script>
+    <script src="additionalValues.js"></script>
+    <script src="løpeoppgave.js"></script>
+    <script>
+        // run();
+        QUnit.test("hello test", function (assert) {
+            assert.equal(estLatitude, !isNaN, "Lat is a number!");
+            assert.equal(estLongitude, !isNaN, "Lon is a number!");
+        });
+        QUnit.test("latlon is number", function (assert) {
+            assert.equal(estLatitude, !isNaN, "Lat is a number!");
+            assert.equal(estLongitude, !isNaN, "Lon is a number!");
+        });
+        QUnit.test("latlon is string", function (assert) {
+            assert.equal(estLatitude, String, "Lat is a string!");
+            assert.equal(estLongitude, String, "Lon is a string!");
+        });
+        QUnit.test("latlon is 0", function (assert) {
+            assert.equal(estLatitude, 0, "Lat is a 0!");
+            assert.equal(estLongitude, 0, "Lon is 0!");
+        });
+        QUnit.test("latlon is null", function (assert) {
+            assert.equal(estLatitude, null, "Lat is a null!");
+            assert.equal(estLongitude, null, "Lon is a null!");
+        });
+    </script>
+</body>
+
+</html>
