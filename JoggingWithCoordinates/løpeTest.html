@@ -17,12 +17,12 @@
     <script src="løpeoppgave.js"></script>
     <script>
         // run();
-        for (let i = 0; i < trekPoints.length; i++) {
-            // QUnit.module("group " + i);
-            QUnit.test("hello test", function (assert) {
+        // QUnit.module("group " + i);
+        QUnit.test("hello test", function (assert) {
+            for (let i = 0; i < trekPoints.length; i++) {
                 assert.ok(true, getLatLon(i));
-            });
-        }
+            }
+        });
     </script>
 </body>
 
