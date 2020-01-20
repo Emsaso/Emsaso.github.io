@@ -29,72 +29,72 @@ let estLongitude = 0;
 // //
 
 // run();
-function run() {
-    getLatLon(checkpointsPassed);
-    getLatLonEveryCheckpoint();
-    getLatLonEverySecond();
-}
+// function run() {
+//     getLatLon(checkpointsPassed);
+//     getLatLonEveryCheckpoint();
+//     getLatLonEverySecond();
+// }
 
-function getLatLonEveryCheckpoint() {
-    let timer = setInterval(() => {
-        let coordinates = getLatLon(checkpointsPassed);
-        let latitude = coordinates[0];
-        let longitude = coordinates[1];
-        checkpointsPassed++;
-        totSeconds++;
-        estimateTime();
-        if (!isNaN(latitude) || !isNaN(longitude)) {
-            console.log(activeTime, latitude, longitude);
-        }
-        if (checkpointsPassed >= trekPoints.length - 4) {
-            clearInterval(timer);
-        } else {
-            clearInterval(timer);
-            getLatLonEverySecond();
-            getLatLonEveryCheckpoint();
-            estLatitude = latitude;
-            estLongitude = longitude;
-        }
-    }, estTimeSec2 * 1000);
-}
+// function getLatLonEveryCheckpoint() {
+//     let timer = setInterval(() => {
+//         let coordinates = getLatLon(checkpointsPassed);
+//         let latitude = coordinates[0];
+//         let longitude = coordinates[1];
+//         checkpointsPassed++;
+//         totSeconds++;
+//         estimateTime();
+//         if (!isNaN(latitude) || !isNaN(longitude)) {
+//             console.log(activeTime, latitude, longitude);
+//         }
+//         if (checkpointsPassed >= trekPoints.length - 4) {
+//             clearInterval(timer);
+//         } else {
+//             clearInterval(timer);
+//             getLatLonEverySecond();
+//             getLatLonEveryCheckpoint();
+//             estLatitude = latitude;
+//             estLongitude = longitude;
+//         }
+//     }, estTimeSec2 * 1000);
+// }
 
-function getLatLonEverySecond() {
-    if (checkpointsPassed + 1 >= 1 && checkpointsPassed + secondsBetweenCheckpoints <= trekPoints.length) {
-        let timer2 = setInterval(() => {
-            coordinates2 = getLatLon(checkpointsPassed + 1);
-            latitude2 = coordinates2[0];
-            longitude2 = coordinates2[1];
-            coordinates1 = getLatLon(checkpointsPassed);
-            latitude1 = coordinates1[0];
-            longitude1 = coordinates1[1];
-            secondsBetweenCheckpoints++;
-            totSeconds++;
-            estimateTime();
-            let latitude = latitude1 + ((latitude2 - latitude1) / estTimeSec * secondsBetweenCheckpoints);
-            let longitude = longitude1 + ((longitude2 - longitude1) / estTimeSec * secondsBetweenCheckpoints);
-            console.log("\t" + activeTime, latitude, longitude);
-            estLatitude = latitude;
-            estLongitude = longitude;
-            if (secondsBetweenCheckpoints >= Math.floor(estTimeSec) - 1) {
-                clearInterval(timer2);
-                secondsBetweenCheckpoints = 0;
-            }
-        }, 1000);
-    }
-}
+// function getLatLonEverySecond() {
+//     if (checkpointsPassed + 1 >= 1 && checkpointsPassed + secondsBetweenCheckpoints <= trekPoints.length) {
+//         let timer2 = setInterval(() => {
+//             coordinates2 = getLatLon(checkpointsPassed + 1);
+//             latitude2 = coordinates2[0];
+//             longitude2 = coordinates2[1];
+//             coordinates1 = getLatLon(checkpointsPassed);
+//             latitude1 = coordinates1[0];
+//             longitude1 = coordinates1[1];
+//             secondsBetweenCheckpoints++;
+//             totSeconds++;
+//             estimateTime();
+//             let latitude = latitude1 + ((latitude2 - latitude1) / estTimeSec * secondsBetweenCheckpoints);
+//             let longitude = longitude1 + ((longitude2 - longitude1) / estTimeSec * secondsBetweenCheckpoints);
+//             console.log("\t" + activeTime, latitude, longitude);
+//             estLatitude = latitude;
+//             estLongitude = longitude;
+//             if (secondsBetweenCheckpoints >= Math.floor(estTimeSec) - 1) {
+//                 clearInterval(timer2);
+//                 secondsBetweenCheckpoints = 0;
+//             }
+//         }, 1000);
+//     }
+// }
 
-function estimateTime() {
-    if (totSeconds >= 60) {
-        totMinutes++;
-        totSeconds = 0;
-    }
-    if (totMinutes >= 60) {
-        totHours++;
-        totMinutes = 0;
-    }
-    activeTime = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" +
-        totSeconds).slice(-2);
-}
+// function estimateTime() {
+//     if (totSeconds >= 60) {
+//         totMinutes++;
+//         totSeconds = 0;
+//     }
+//     if (totMinutes >= 60) {
+//         totHours++;
+//         totMinutes = 0;
+//     }
+//     activeTime = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" +
+//         totSeconds).slice(-2);
+// }
 
 function getLatLon(checkpointsPassed) {
     let initTimeModified = initTime.slice(0, -10);
