@@ -1,5 +1,5 @@
-QUnit.test("hello test", function (assert) {
-    for (let i = 0; i < trekPoints.length - 2; i++) {
+QUnit.test("checkpoints", function (assert) {
+    for (let i = 1; i < totSeconds / 100; i++) {
         assert.ok(true, getLatLonEverySecond(i));
     }
 });
