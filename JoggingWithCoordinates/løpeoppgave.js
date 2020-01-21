@@ -14,6 +14,7 @@ let estTimeSec2 = 0;
 let estLatitude = 0;
 let estLongitude = 0;
 let totSeconds = 0;
+let cpP = 0;
 
 for (let i = 0; i < trekPoints.length - 2; i++) {
     let estTimeSec = getLatLon(checkpointsPassed)[4];
@@ -21,7 +22,6 @@ for (let i = 0; i < trekPoints.length - 2; i++) {
 }
 
 function getLatLonEverySecond(totalAmountOfSeconds) {
-    let cpP = 0;
     let totalLatitudeEachSecond;
     let totalLongitudeEachSecond;
     for (let i = 0; i < totalAmountOfSeconds; i++) {
@@ -36,6 +36,8 @@ function getLatLonEverySecond(totalAmountOfSeconds) {
             }
         }
         cpP++;
+        console.log(cpP);
+        //Jeg har gjort en feil i denne koden, fiks det imorgen
     }
     return [totalLatitudeEachSecond, totalLongitudeEachSecond];
 }
