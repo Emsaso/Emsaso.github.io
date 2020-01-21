@@ -12,89 +12,31 @@ let secondsBetweenCheckpoints = 0;
 let estTimeSec = 0;
 let estTimeSec2 = 0;
 let totSeconds = 0;
-let totMinutes = 0;
-let totHours = 0;
 let estLatitude = 0;
 let estLongitude = 0;
 
-// //
-// let result = document.createElement("div");
-// result.innerHTML = `0 0`;
-// document.body.appendChild(result);
+function getLatLonEverySecond(checkpointsPassed) {
+    let checkpointLatitude = getLatLon(checkpointsPassed)[0];
+    let checkpointLongitude = getLatLon(checkpointsPassed)[1];
+    let latitudePerSecond = getLatLon(checkpointsPassed)[2];
+    let longitudePerSecond = getLatLon(checkpointsPassed)[3];
+    let estimatedTimeInSeconds = getLatLon(checkpointsPassed)[4];
+    let totalLatitudeEachSecond;
+    let totalLongitudeEachSecond;
+    for (let i = 0; i < estimatedTimeInSeconds; i++) {
+        totalLatitudeEachSecond = checkpointLatitude - (latitudePerSecond * i);
+        totalLongitudeEachSecond = checkpointLongitude - (longitudePerSecond * i);
+        return [totalLatitudeEachSecond, totalLongitudeEachSecond];
+    }
+}
 
-// let button = document.createElement("button");
-// button.innerHTML = "Get values";
-// button.onclick = function(){result.innerHTML = `${estLatitude} ${estLongitude}`;};
-// document.body.appendChild(button);
-// //
-
-// run();
-// function run() {
-//     getLatLon(checkpointsPassed);
-//     getLatLonEveryCheckpoint();
-//     getLatLonEverySecond();
-// }
-
-// function getLatLonEveryCheckpoint() {
-//     let timer = setInterval(() => {
-//         let coordinates = getLatLon(checkpointsPassed);
-//         let latitude = coordinates[0];
-//         let longitude = coordinates[1];
-//         checkpointsPassed++;
-//         totSeconds++;
-//         estimateTime();
-//         if (!isNaN(latitude) || !isNaN(longitude)) {
-//             console.log(activeTime, latitude, longitude);
-//         }
-//         if (checkpointsPassed >= trekPoints.length - 4) {
-//             clearInterval(timer);
-//         } else {
-//             clearInterval(timer);
-//             getLatLonEverySecond();
-//             getLatLonEveryCheckpoint();
-//             estLatitude = latitude;
-//             estLongitude = longitude;
-//         }
-//     }, estTimeSec2 * 1000);
-// }
-
-// function getLatLonEverySecond() {
-//     if (checkpointsPassed + 1 >= 1 && checkpointsPassed + secondsBetweenCheckpoints <= trekPoints.length) {
-//         let timer2 = setInterval(() => {
-//             coordinates2 = getLatLon(checkpointsPassed + 1);
-//             latitude2 = coordinates2[0];
-//             longitude2 = coordinates2[1];
-//             coordinates1 = getLatLon(checkpointsPassed);
-//             latitude1 = coordinates1[0];
-//             longitude1 = coordinates1[1];
-//             secondsBetweenCheckpoints++;
-//             totSeconds++;
-//             estimateTime();
-//             let latitude = latitude1 + ((latitude2 - latitude1) / estTimeSec * secondsBetweenCheckpoints);
-//             let longitude = longitude1 + ((longitude2 - longitude1) / estTimeSec * secondsBetweenCheckpoints);
-//             console.log("\t" + activeTime, latitude, longitude);
-//             estLatitude = latitude;
-//             estLongitude = longitude;
-//             if (secondsBetweenCheckpoints >= Math.floor(estTimeSec) - 1) {
-//                 clearInterval(timer2);
-//                 secondsBetweenCheckpoints = 0;
-//             }
-//         }, 1000);
-//     }
-// }
-
-// function estimateTime() {
-//     if (totSeconds >= 60) {
-//         totMinutes++;
-//         totSeconds = 0;
-//     }
-//     if (totMinutes >= 60) {
-//         totHours++;
-//         totMinutes = 0;
-//     }
-//     activeTime = ("0" + totHours).slice(-2) + ":" + ("0" + totMinutes).slice(-2) + ":" + ("0" +
-//         totSeconds).slice(-2);
-// }
+function totalSeconds() {
+    for (let i = 0; i < trekPoints.length; i++) {
+        let estTimeSec = getLatLon(i)[4];
+        totSeconds += estTimeSec;
+    }
+    return totSeconds;
+}
 
 function getLatLon(checkpointsPassed) {
     let initTimeModified = initTime.slice(0, -10);
@@ -151,5 +93,5 @@ function getLatLon(checkpointsPassed) {
     let estimatedLongitude = lonPrSec / speedVariables;
     let finalLatitude = lat1 - estimatedLatitude;
     let finalLongitute = lon1 - estimatedLongitude;
-    return [finalLatitude, finalLongitute];
+    return [finalLatitude, finalLongitute, latPrSec, lonPrSec, estTimeSec];
 }
