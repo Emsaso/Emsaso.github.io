@@ -15,6 +15,8 @@ let estLatitude = 0;
 let estLongitude = 0;
 let totSeconds = 0;
 let cpP = 0;
+let ssCp = 0;
+let secondCounter = 0;
 
 for (let i = 0; i < trekPoints.length - 2; i++) {
     let estTimeSec = getLatLon(checkpointsPassed)[4];
@@ -22,23 +24,21 @@ for (let i = 0; i < trekPoints.length - 2; i++) {
 }
 
 function getLatLonEverySecond(totalAmountOfSeconds) {
+    console.log(cpP);
+    console.log(ssCp);
     let totalLatitudeEachSecond;
     let totalLongitudeEachSecond;
-    for (let i = 0; i < totalAmountOfSeconds; i++) {
-        let values = getLatLon(cpP);
-        if (i % Math.round(cpP) == 0) {
+    let values = getLatLon(cpP);
+        if (ssCp == 0) {
             totalLatitudeEachSecond = values[0];
             totalLongitudeEachSecond = values[1];
+            cpP++;
+            ssCp = values[4];
         } else {
-            for (let y = 0; y < values[4]; y++) {
-                totalLatitudeEachSecond = values[0] - (values[2] * y);
-                totalLongitudeEachSecond = values[1] - (values[3] * y);
-            }
+            totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
+            totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
+            ssCp--;
         }
-        cpP++;
-        console.log(cpP);
-        //Jeg har gjort en feil i denne koden, fiks det imorgen
-    }
     return [totalLatitudeEachSecond, totalLongitudeEachSecond];
 }
 
@@ -98,5 +98,5 @@ function getLatLon(checkpointsPassed) {
     let estimatedLongitude = lonPrSec / speedVariables;
     let finalLatitude = lat1 - estimatedLatitude;
     let finalLongitute = lon1 - estimatedLongitude;
-    return [finalLatitude, finalLongitute, latPrSec, lonPrSec, estTimeSec];
+    return [finalLatitude, finalLongitute, latPrSec, lonPrSec, timeInSeconds];
 }
