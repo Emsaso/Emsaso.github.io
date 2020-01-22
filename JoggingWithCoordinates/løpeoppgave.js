@@ -19,8 +19,9 @@ let ssCp = 0;
 let secondCounter = 0;
 
 for (let i = 0; i < trekPoints.length - 2; i++) {
-    let estTimeSec = getLatLon(checkpointsPassed)[4];
-    totSeconds += estTimeSec;
+    let estTimeSec = getLatLon(i)[4];
+    let variables = getLatLon(i)[5];
+    totSeconds += Math.round(estTimeSec * variables);
 }
 
 function getLatLonEverySecond(chosenSecond) {
@@ -33,7 +34,7 @@ function getLatLonEverySecond(chosenSecond) {
         totalLatitudeEachSecond = values[0];
         totalLongitudeEachSecond = values[1];
         cpP++;
-        ssCp = values[4];
+        ssCp = values[4] * Math.round(values[5]);
     } else {
         totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
         totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
@@ -99,5 +100,5 @@ function getLatLon(checkpointsPassed) {
     let estimatedLongitude = lonPrSec / speedVariables;
     let finalLatitude = lat1 - estimatedLatitude;
     let finalLongitute = lon1 - estimatedLongitude;
-    return [finalLatitude, finalLongitute, latPrSec, lonPrSec, timeInSeconds];
+    return [finalLatitude, finalLongitute, latPrSec, lonPrSec, timeInSeconds, speedVariables];
 }
