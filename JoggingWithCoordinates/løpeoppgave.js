@@ -23,22 +23,23 @@ for (let i = 0; i < trekPoints.length - 2; i++) {
     totSeconds += estTimeSec;
 }
 
-function getLatLonEverySecond(totalAmountOfSeconds) {
+function getLatLonEverySecond(chosenSecond) {
     console.log(cpP);
     console.log(ssCp);
     let totalLatitudeEachSecond;
     let totalLongitudeEachSecond;
     let values = getLatLon(cpP);
-        if (ssCp == 0) {
-            totalLatitudeEachSecond = values[0];
-            totalLongitudeEachSecond = values[1];
-            cpP++;
-            ssCp = values[4];
-        } else {
-            totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
-            totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
-            ssCp--;
-        }
+    if (ssCp == 0) {
+        totalLatitudeEachSecond = values[0];
+        totalLongitudeEachSecond = values[1];
+        cpP++;
+        ssCp = values[4];
+    } else {
+        totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
+        totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
+        ssCp--;
+    }
+    // secondCounter++;
     return [totalLatitudeEachSecond, totalLongitudeEachSecond];
 }
 
