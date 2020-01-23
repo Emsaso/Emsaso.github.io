@@ -1,5 +1,4 @@
 QUnit.test("checkpoints", function (assert) {
-    for (let i = 1; i < totSeconds - 200; i++) {
-        assert.ok(true, getLatLonEverySecond(i));
-    }
+    let chosenAmountOfSecondsSinceStartOfRace = 1224;
+    assert.ok(true, getLatLonOnce(chosenAmountOfSecondsSinceStartOfRace));
 });

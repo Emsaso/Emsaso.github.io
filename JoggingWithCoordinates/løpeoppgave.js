@@ -24,24 +24,45 @@ for (let i = 0; i < trekPoints.length - 2; i++) {
     totSeconds += Math.round(estTimeSec * variables);
 }
 
-function getLatLonEverySecond(chosenSecond) {
-    console.log(cpP);
-    console.log(ssCp);
-    let totalLatitudeEachSecond;
-    let totalLongitudeEachSecond;
-    let values = getLatLon(cpP);
-    if (ssCp == 0) {
+// function getLatLonEverySecond(chosenSecond) {
+//     console.log(cpP);
+//     console.log(ssCp);
+//     let totalLatitudeEachSecond;
+//     let totalLongitudeEachSecond;
+//     let values = getLatLon(cpP);
+//     if (ssCp == 0) {
+//         totalLatitudeEachSecond = values[0];
+//         totalLongitudeEachSecond = values[1];
+//         cpP++;
+//         ssCp = values[4] * Math.round(values[5]);
+//     } else {
+//         totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
+//         totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
+//         ssCp--;
+//     }
+//     // secondCounter++;
+//     return [totalLatitudeEachSecond, totalLongitudeEachSecond];
+// }
+
+function getLatLonOnce(chosenSecond) {
+    let i = 0;
+    let values = getLatLon(0);
+    let cS = chosenSecond;
+    console.log(cS, values[4], i);
+    while (cS - values[4] > getLatLon(i + 1)[4]) {
+        i++;
+        cS -= values[4];
+        values = getLatLon(i);
+    }
+    console.log(cS, values[4], i);
+    if (cS == 0) {
         totalLatitudeEachSecond = values[0];
         totalLongitudeEachSecond = values[1];
-        cpP++;
-        ssCp = values[4] * Math.round(values[5]);
     } else {
-        totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
-        totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
-        ssCp--;
+        totalLatitudeEachSecond = values[0] - (values[2] * cS);
+        totalLongitudeEachSecond = values[1] - (values[3] * cS);
     }
-    // secondCounter++;
-    return [totalLatitudeEachSecond, totalLongitudeEachSecond];
+    return [totalLatitudeEachSecond, totalLongitudeEachSecond]
 }
 
 
