@@ -23,9 +23,15 @@ function getLatLonTest(trailData, raceData, seconds) {
     // console.log(raceData[i].location.lat);
     // console.log(seconds);
     // console.log(raceData[i + 1].time);
-    let i = 0;
-    let estimatedLatitude = trailData[i].lat + ((raceData[i + 1].location.lat - raceData[i].location.lat) * seconds / raceData[i + 1].time);
-    let estimatedLongitude = trailData[i].lon + ((raceData[i + 1].location.lon - raceData[i].location.lon) * seconds / raceData[i + 1].time);
+
+    let estimatedLatitude = trailData[0].lat + (
+        (raceData[1].location.lat - raceData[0].location.lat) *
+        seconds / raceData[1].time);
+
+    let estimatedLongitude = trailData[0].lon + (
+        (raceData[1].location.lon - raceData[0].location.lon) *
+        seconds / raceData[1].time);
+
     return [estimatedLatitude, estimatedLongitude];
 }
 
