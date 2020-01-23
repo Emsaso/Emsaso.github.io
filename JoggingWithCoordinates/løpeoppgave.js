@@ -1,6 +1,5 @@
 ﻿let parser = new DOMParser();
 let xmlDoc = parser.parseFromString(gpx, "text/xml");
-let trekStart = xmlDoc.getElementsByTagName('time');
 let trekPoints = xmlDoc.getElementsByTagName('trkpt');
 let initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
 let initTime2 = Array.from(trekPoints[1].children).filter(p => p.tagName == 'time')[0].textContent;
@@ -18,30 +17,16 @@ let cpP = 0;
 let ssCp = 0;
 let secondCounter = 0;
 
-for (let i = 0; i < trekPoints.length - 2; i++) {
-    let estTimeSec = getLatLon(i)[4];
-    let variables = getLatLon(i)[5];
-    totSeconds += Math.round(estTimeSec * variables);
-}
-
-function getLatLonEverySecond(chosenSecond) {
-    console.log(cpP);
-    console.log(ssCp);
-    let totalLatitudeEachSecond;
-    let totalLongitudeEachSecond;
-    let values = getLatLon(cpP);
-    if (ssCp == 0) {
-        totalLatitudeEachSecond = values[0];
-        totalLongitudeEachSecond = values[1];
-        cpP++;
-        ssCp = values[4] * Math.round(values[5]);
-    } else {
-        totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
-        totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
-        ssCp--;
-    }
-    // secondCounter++;
-    return [totalLatitudeEachSecond, totalLongitudeEachSecond];
+function getLatLonTest(trailData, raceData, seconds) {
+    // console.log(trailData[i].lat);
+    // console.log(raceData[i + 1].location.lat);
+    // console.log(raceData[i].location.lat);
+    // console.log(seconds);
+    // console.log(raceData[i + 1].time);
+    let i = 0;
+    let estimatedLatitude = trailData[i].lat + ((raceData[i + 1].location.lat - raceData[i].location.lat) * seconds / raceData[i + 1].time);
+    let estimatedLongitude = trailData[i].lon + ((raceData[i + 1].location.lon - raceData[i].location.lon) * seconds / raceData[i + 1].time);
+    return [estimatedLatitude, estimatedLongitude];
 }
 
 function getLatLonOnce(chosenSecond) {
@@ -64,7 +49,6 @@ function getLatLonOnce(chosenSecond) {
     }
     return [totalLatitudeEachSecond, totalLongitudeEachSecond]
 }
-
 
 function getLatLon(checkpointsPassed) {
     let initTimeModified = initTime.slice(0, -10);
