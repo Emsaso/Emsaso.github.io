@@ -24,25 +24,25 @@ for (let i = 0; i < trekPoints.length - 2; i++) {
     totSeconds += Math.round(estTimeSec * variables);
 }
 
-// function getLatLonEverySecond(chosenSecond) {
-//     console.log(cpP);
-//     console.log(ssCp);
-//     let totalLatitudeEachSecond;
-//     let totalLongitudeEachSecond;
-//     let values = getLatLon(cpP);
-//     if (ssCp == 0) {
-//         totalLatitudeEachSecond = values[0];
-//         totalLongitudeEachSecond = values[1];
-//         cpP++;
-//         ssCp = values[4] * Math.round(values[5]);
-//     } else {
-//         totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
-//         totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
-//         ssCp--;
-//     }
-//     // secondCounter++;
-//     return [totalLatitudeEachSecond, totalLongitudeEachSecond];
-// }
+function getLatLonEverySecond(chosenSecond) {
+    console.log(cpP);
+    console.log(ssCp);
+    let totalLatitudeEachSecond;
+    let totalLongitudeEachSecond;
+    let values = getLatLon(cpP);
+    if (ssCp == 0) {
+        totalLatitudeEachSecond = values[0];
+        totalLongitudeEachSecond = values[1];
+        cpP++;
+        ssCp = values[4] * Math.round(values[5]);
+    } else {
+        totalLatitudeEachSecond = values[0] - (values[2] * ssCp);
+        totalLongitudeEachSecond = values[1] - (values[3] * ssCp);
+        ssCp--;
+    }
+    // secondCounter++;
+    return [totalLatitudeEachSecond, totalLongitudeEachSecond];
+}
 
 function getLatLonOnce(chosenSecond) {
     let i = 0;
@@ -59,8 +59,8 @@ function getLatLonOnce(chosenSecond) {
         totalLatitudeEachSecond = values[0];
         totalLongitudeEachSecond = values[1];
     } else {
-        totalLatitudeEachSecond = values[0] - (values[2] * cS);
-        totalLongitudeEachSecond = values[1] - (values[3] * cS);
+        totalLatitudeEachSecond = values[0] - (values[2] * (values[4] - cS));
+        totalLongitudeEachSecond = values[1] - (values[3] * (values[4] - cS));
     }
     return [totalLatitudeEachSecond, totalLongitudeEachSecond]
 }
