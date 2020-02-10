@@ -18,9 +18,9 @@
                 dist *= 1000;
                 var height;
                 if (ele1 > ele2) {
-                    height = (ele1) - (ele2);
+                    height = ele1 - ele2;
                 } else {
-                    height = (ele2) - (ele1);
+                    height = ele2 - ele1;
                 }
                 if (height == 0) {
                     dist = dist;
@@ -34,35 +34,35 @@
 
         function calculateTiredness(i) {
             let value = 10;
-            let tiredness = (((i / trekPoints.length) / (i / trekPoints.length + value)) + 1);
-            return tiredness
+            let tiredness = (i / trekPoints.length) / (i / trekPoints.length + value) + 1;
+            return tiredness;
         }
 
         function calculateProwess(experience) {
             let prowess;
             switch (experience) {
                 case "beginner":
-                    prowess = 0.85
+                    prowess = 0.85;
                     break;
                 case "novice":
-                    prowess = 0.88
+                    prowess = 0.88;
                     break;
                 case "good":
-                    prowess = 0.91
+                    prowess = 0.91;
                     break;
                 case "advanced":
-                    prowess = 0.94
+                    prowess = 0.94;
                     break;
                 case "experienced":
-                    prowess = 0.97
+                    prowess = 0.97;
                     break;
                 case "pro":
-                    prowess = 1
+                    prowess = 1;
                     break;
                 default:
                     prowess = 1;
             }
-            return prowess
+            return prowess;
         }
 
         function calculateRain(rainGauge) {
@@ -83,10 +83,10 @@
                 default:
                     weather = 1;
             }
-            return weather
+            return weather;
         }
 
         function calculateSteepness(ele1, ele2) {
             let steepness = ((ele2 - ele1) / ele2) + 1;
-            return steepness
+            return steepness;
         }
