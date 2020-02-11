@@ -1,4 +1,4 @@
-let intervalID = window.setInterval(myCallback, 1000);
+window.setInterval(repeatEverySecond, 1000);
 let latitude = document.createElement("div");
 document.body.appendChild(latitude);
 let longitude = document.createElement("div");
@@ -8,7 +8,7 @@ document.body.appendChild(seconds);
 
 let startTime = Date.now();
 
-function myCallback() {
+function repeatEverySecond() {
     let secondsSinceStart = Math.floor((Date.now() - startTime) / 1000);
     let result = getLatLonOnce(secondsSinceStart);
     latitude.innerHTML = "Lat: " + result[0];
