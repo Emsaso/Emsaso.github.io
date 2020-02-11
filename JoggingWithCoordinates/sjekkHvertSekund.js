@@ -6,7 +6,7 @@ document.body.appendChild(longitude);
 let seconds = document.createElement("div");
 document.body.appendChild(seconds);
 
-let startTime = Date.now()
+let startTime = Date.now();
 
 function myCallback() {
     let secondsSinceStart = Math.floor((Date.now() - startTime) / 1000);
