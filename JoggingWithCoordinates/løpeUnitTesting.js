@@ -1,9 +1,3 @@
-// for (let i = 0; i < 100; i++) {
-//     QUnit.test(i + " seconds", function (assert) {
-//         assert.ok(true, getLatLonOnce(i));
-//     });
-// }
-
 QUnit.test("1224 seconds", function (assert) {
     let chosenAmountOfSecondsSinceStartOfRace = 1224;
     assert.ok(true, getLatLonOnce(chosenAmountOfSecondsSinceStartOfRace));
