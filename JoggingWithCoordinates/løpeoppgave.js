@@ -58,8 +58,8 @@ function getLatLonOnce(chosenSecond, exp, wth) {
         totalLatitudeEachSecond = values[0];
         totalLongitudeEachSecond = values[1];
     } else {
-        totalLatitudeEachSecond = values[0] - (values[2] * (values[4] - cS));
-        totalLongitudeEachSecond = values[1] - (values[3] * (values[4] - cS));
+        totalLatitudeEachSecond = values[0] - (values[2] * (values[4] - cS)) * values[5];
+        totalLongitudeEachSecond = values[1] - (values[3] * (values[4] - cS)) * values[5];
     }
     return [totalLatitudeEachSecond, totalLongitudeEachSecond]
 }
