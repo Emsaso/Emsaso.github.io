@@ -1,8 +1,16 @@
 ﻿let parser = new DOMParser();
 let xmlDoc = parser.parseFromString(gpx, "text/xml");
-let trekPoints = xmlDoc.getElementsByTagName('trkpt');
-let initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
-let initTime2 = Array.from(trekPoints[1].children).filter(p => p.tagName == 'time')[0].textContent;
+let trekPoints;
+let initTime;
+let initTime2;
+
+function getDocument(sD) {
+    xmlDoc = parser.parseFromString(sD, "text/xml");
+    trekPoints = xmlDoc.getElementsByTagName('trkpt');
+    initTime = Array.from(trekPoints[0].children).filter(p => p.tagName == 'time')[0].textContent;
+    initTime2 = Array.from(trekPoints[1].children).filter(p => p.tagName == 'time')[0].textContent;
+}
+
 let text = "";
 let finalValueInKm = 0;
 let hypotenuse = 0;
@@ -35,15 +43,15 @@ function getLatLonTest(trailData, raceData, seconds) {
     return [estimatedLatitude, estimatedLongitude];
 }
 
-function getLatLonOnce(chosenSecond) {
+function getLatLonOnce(chosenSecond, exp, wth) {
     let i = 0;
-    let values = getLatLon(0);
+    let values = getLatLon(0, exp, wth);
     let cS = chosenSecond;
-    console.log(cS, values[4], i);
-    while (cS - values[4] > getLatLon(i + 1)[4]) {
+    // console.log(cS, values[4], i);
+    while (cS - values[4] > getLatLon(i + 1, exp, wth)[4]) {
         i++;
         cS -= values[4];
-        values = getLatLon(i);
+        values = getLatLon(i, exp, wth);
     }
     console.log(cS, values[4], i);
     if (cS == 0) {
@@ -56,7 +64,7 @@ function getLatLonOnce(chosenSecond) {
     return [totalLatitudeEachSecond, totalLongitudeEachSecond]
 }
 
-function getLatLon(checkpointsPassed) {
+function getLatLon(checkpointsPassed, experience, weather) {
     let initTimeModified = initTime.slice(0, -10);
     let initTimeModified2 = initTime2.slice(0, -10);
     initTimeModified = initTimeModified.split("-");
@@ -95,8 +103,6 @@ function getLatLon(checkpointsPassed) {
     let latPrSec = (lat2 - lat1) / timeInSeconds;
     let lonPrSec = (lon2 - lon1) / timeInSeconds;
     let tiredness = calculateTiredness(correctTime);
-    let experience = calculateProwess("pro");
-    let weather = calculateRain("clearWeather");
     let steepness = calculateSteepness(ele1, ele2);
     let speedVariables = tiredness / experience / weather * steepness;
 
