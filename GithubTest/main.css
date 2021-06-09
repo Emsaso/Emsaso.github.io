@@ -3,9 +3,13 @@
     width: fit-content;
 }
 
+p {
+    font-size: 1em;
+    text-align: center;
+}
+
 .rainbow {
     background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-align: center;
 }
