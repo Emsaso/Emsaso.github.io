@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Modulus</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <div class="container">
+        <p id="value"></p>
+        <p>%</p>
+        <p id="modulus"></p>
+        <p>=</p>
+        <p id="result"></p>
+        <p>(</p>
+        <p id="iterations"></p>
+        <p>)</p>
+    </div>
+    <div class="container">
+        <input id="initialValue" type="range" min="1" max="100" onchange="valueChange()">
+        <input id="modulusValue" type="range" min="1" max="100" onchange="valueChange()">
+    </div>
+    <script src='main.js'></script>
+</body>
+
+</html>
