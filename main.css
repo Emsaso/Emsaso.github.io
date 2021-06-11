@@ -12,6 +12,10 @@
     padding: 15px 0;
 }
 
+h1 {
+    text-align: center;
+}
+
 h3 {
     font-size: 2em;
     text-decoration: dotted underline;
