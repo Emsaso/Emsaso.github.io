@@ -1,0 +1,51 @@
+body {
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table {
+    margin: auto;
+    width: 42.5%;
+}
+
+input {
+    margin-top: 10px;
+    width: 10%;
+}
+
+button {
+    width: 10%;
+}
+
+tr:nth-child(1) {
+    background-color: black;
+}
+tr:nth-child(4n+0) {
+    background-color: #ff00ff;
+}
+
+tr:nth-child(4n+3) {
+    background-color: #ff00c3;
+}
+
+tr:nth-child(4n+2) {
+    background-color: #ff0099;
+}
+
+tr:nth-child(4n+5) {
+    background-color: #ff0069;
+}
+
+th {
+    background-image: linear-gradient(90deg, red, orange, green, blue, yellow, violet);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-size: 3em;
+}
+td, input, button {
+    
+    font-size: 2em;
+}
