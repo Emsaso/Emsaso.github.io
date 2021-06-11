@@ -1,0 +1,15 @@
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-item {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    text-align: center;
+    justify-content: center;
+}

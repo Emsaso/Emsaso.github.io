@@ -1,0 +1,27 @@
+body {
+    animation: blackWhite 2s infinite;
+    transition: 2s linear
+}
+
+.flex-item {
+    animation: whiteBlack 2s infinite;
+    transition: 2s linear
+}
+
+@keyframes blackWhite {
+    0% {
+        background-color: white;
+    }
+    51% {
+        background-color: black;
+    }
+}
+
+@keyframes whiteBlack {
+    0% {
+        border-color: black;
+    }
+    51% {
+        border-color: white;
+    }
+}
