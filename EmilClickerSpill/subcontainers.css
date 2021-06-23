@@ -1,0 +1,35 @@
+.sub-container {
+    display: flex;
+    flex-direction: row;
+    max-height: 100%;
+    min-height: 100%;
+    max-width: 33.33%;
+    min-width: 33.33%;
+    border: 1px solid black;
+    word-wrap: break-word;
+}
+
+.sub-container div {
+    padding: 5px;
+}
+
+#skill-container {}
+
+#inventory-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.inventory-sub-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#spell-container {}
+
+#equipment-container {}
+
+#game-container {
+    background-image: url("assets/Blue-Backgrounds.jpg");
+}

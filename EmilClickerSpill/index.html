@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='containers.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='subcontainers.css'>
+
+
+    <link rel='stylesheet' type='text/css' media='screen' href='tooltip.css'>
+</head>
+
+<body>
+    <div id="psuedo-body">
+        <div class="horizontal-main-container">
+            <div id="skill-container" class="sub-container">
+                <div class="skill">
+                    <button>do something</button>
+                </div>
+                <div class="skill">
+                    <button>do something</button>
+                </div>
+                <div class="skill">
+                    <button>do something</button>
+                </div>
+                <div class="skill">
+                    <button>do something</button>
+                </div>
+            </div>
+            <div id="inventory-container" class="sub-container">
+                <!-- <div id="resource-container" class="inventory-sub-container">
+                    <p>Resources: </p>
+                    <div class="inventory-item rescource">
+                        <div>Gold <span>0</span></div>
+                    </div>
+                    <div class="inventory-item rescource">
+                        <div>Wood <span>0</span></div>
+                    </div>
+                    <div class="inventory-item rescource">
+                        <div>Metal <span>0</span></div>
+                    </div>
+                </div>
+                <div id="manas-container" class="inventory-sub-container">
+                    <p>Manas:</p>
+                    <div class="inventory-item manas">
+                        <div>Arcane <span>0</span></div>
+                    </div>
+                    <div class="inventory-item manas">
+                        <div>Nature <span>0</span></div>
+                    </div>
+                    <div class="inventory-item manas">
+                        <div>Fire <span>0</span></div>
+                    </div>
+                    <div class="inventory-item manas">
+                        <div>Water <span>0</span></div>
+                    </div>
+                    <div class="inventory-item manas">
+                        <div>Earth <span>0</span></div>
+                    </div>
+                </div>
+                <div id="reagent-container" class="inventory-sub-container">
+                    <p>Reagents:</p>
+                    <div class="inventory-item rescource">
+                        <div>Ichor <span>0</span></div>
+                    </div>
+                    <div class="inventory-item rescource">
+                        <div>Fungi <span>0</span></div>
+                    </div>
+                    <div class="inventory-item rescource">
+                        <div>Rune stones <span>0</span></div>
+                    </div>
+                </div> -->
+            </div>
+            <div id="spell-container" class="sub-container">
+                <div class="spell">
+                    <button>fireball</button>
+                </div>
+            </div>
+        </div>
+        <div class="horizontal-main-container">
+            <div id="equipment-container" class="sub-container">
+                <div class="vertical-container">
+                    <div class="equipment">Head:
+                        <p class="tooltip">None <span class="tooltiptext">Don't go cycling without a helmet!</span>
+                        </p>
+                    </div>
+                    <div class="equipment">Chest:
+                        <p class="tooltip">Shirt <span class="tooltiptext">A normal, logo-less shirt.
+                                <i>Pitiful.</i></span></p>
+                    </div>
+                    <div class="equipment">Legs:
+                        <p class="tooltip">Sweatpants <span class="tooltiptext">For those who value comfortability over
+                                defence.</span></p>
+                    </div>
+                    <div class="equipment">Bracer:
+                        <p class="tooltip">None <span class="tooltiptext">What weak, defenceless arms.</span></p>
+                    </div>
+                    <div class="equipment">Shoes:
+                        <p class="tooltip">Sandals <span class="tooltiptext">Not very practical.</span></p>
+                    </div>
+                </div>
+                <div class="vertical-container">
+                    <div class="equipment">Ring:
+                        <p class="tooltip">None <span class="tooltiptext">Un-gilged... Un-bejeweled...</span></p>
+                    </div>
+                    <div class="equipment">Amulet:
+                        <p class="tooltip">None <span class="tooltiptext">Un-gilged... Un-bejeweled...</span></p>
+                    </div>
+                    <div class="equipment">Earring:
+                        <p class="tooltip">None <span class="tooltiptext">Un-gilged... Un-bejeweled...</span></p>
+                    </div>
+                    <div class="equipment">Bracelets:
+                        <p class="tooltip">None <span class="tooltiptext">Un-gilged... Un-bejeweled...</span></p>
+                    </div>
+                </div>
+                <div class="vertical-container">
+                    <div class="equipment">Right hand:
+                        <p class="tooltip">Wooden Sword <span class="tooltiptext">A practice sword.</span></p>
+                    </div>
+                    <div class="equipment">Left hand:
+                        <p class="tooltip">Wooden Shield <span class="tooltiptext">A practice shield.</span></p>
+                    </div>
+                </div>
+            </div>
+            <div id="game-container" class="sub-container"></div>
+            <div class="sub-container"></div>
+        </div>
+        <div class="horizontal-main-container">
+            <div class="sub-container"></div>
+            <div class="sub-container"></div>
+            <div class="sub-container"></div>
+        </div>
+    </div>
+    <script src='script.js'></script>
+    <script src='scripts/skills.js'></script>
+    <script src='scripts/inventory.js'></script>
+    <script src='scripts/spells.js'></script>
+    <script src='scripts/equipment.js'></script>
+    <script src='scripts/game.js'></script>
+</body>
+
+</html>

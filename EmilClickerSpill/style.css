@@ -1,0 +1,22 @@
+#psuedo-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 95vh;
+    border: 3px solid #696969;
+    border-radius: 15px;
+    box-shadow: 0 0 0 3px #000000;
+}
+
+h6 {
+    margin: 0;
+    font-size: 1em;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+p {
+    margin: 0;
+}

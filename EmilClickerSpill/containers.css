@@ -1,0 +1,26 @@
+
+.horizontal-main-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.horrizontal-main-container:nth-child(1) {
+    border-radius: 15px 15px 0 0;
+}
+
+.horrizontal-main-container:nth-child(3) {
+    border-radius: 0 0 15px 15px;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+}
