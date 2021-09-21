@@ -1,0 +1,9 @@
+Oppgaven her er å lage ditt eget trommesett med keyboard knapper eller mus.
+
+1) vi må lage mange div'er med keyboard events og mouse events i HTML'en.
+
+2) vi må sette opp eventhandlers i Javascript som håndterer hva som skjer når du gjør en spesifik handling.
+
+3) Jeg har lagt til flere tromme lyder i assets mappen, som vi skal bruke når du trykker på forskjellige knapper.
+
+Jeg tror vi tar denne oppgaven over 2 eller flere økter, og vi får se hvor fort vi kommer gjennom det. :)

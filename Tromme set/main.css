@@ -1,0 +1,34 @@
+body {
+    background-image: url("assets/images/space-background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    border: 5px solid black;
+}
+
+.horizontal-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+h1, span {
+    padding: 5px;
+    color: #fff;
+    background-color: #0008;
+}
+
+button {
+    margin: 15px;
+    width: 100px;
+    padding: 15px;
+}

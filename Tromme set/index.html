@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tromme set</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+</head>
+
+<body>
+    <div class="horizontal-container">
+        <div class="vertical-container">
+            <div class="horizontal-container">
+                <button onclick="playSound(this.innerHTML)">Q</button>
+                <button onclick="playSound(this.innerHTML)">W</button>
+                <button onclick="playSound(this.innerHTML)">E</button>
+                <button onclick="playSound(this.innerHTML)">R</button>
+                <button onclick="playSound(this.innerHTML)">T</button>
+            </div>
+            <div class="horizontal-container">
+                <button onclick="playSound(this.innerHTML)">A</button>
+                <button onclick="playSound(this.innerHTML)">S</button>
+                <button onclick="playSound(this.innerHTML)">D</button>
+                <button onclick="playSound(this.innerHTML)">F</button>
+                <button onclick="playSound(this.innerHTML)">G</button>
+            </div>
+            <div class="horizontal-container">
+                <button onclick="playSound(this.innerHTML)">Z</button>
+                <button onclick="playSound(this.innerHTML)">X</button>
+                <button onclick="playSound(this.innerHTML)">C</button>
+                <button onclick="playSound(this.innerHTML)">V</button>
+                <button onclick="playSound(this.innerHTML)">B</button>
+            </div>
+        </div>
+        <div class="vertical-container">
+            <div class="horizontal-container">
+                <button onclick="playSound(this.innerHTML)">Y</button>
+                <button onclick="playSound(this.innerHTML)">U</button>
+                <button onclick="playSound(this.innerHTML)">I</button>
+                <button onclick="playSound(this.innerHTML)">O</button>
+                <button onclick="playSound(this.innerHTML)">P</button>
+            </div>
+            <div class="horizontal-container">
+                <button onclick="playSound(this.innerHTML)">H</button>
+                <button onclick="playSound(this.innerHTML)">J</button>
+                <button onclick="playSound(this.innerHTML)">K</button>
+                <button onclick="playSound(this.innerHTML)">L</button>
+                <button onclick="playSound(this.innerHTML)">Ø</button>
+            </div>
+            <div class="horizontal-container">
+                <button onclick="playSound(this.innerHTML)">N</button>
+                <button onclick="playSound(this.innerHTML)">M</button>
+                <button onclick="playSound(this.innerHTML)">,</button>
+            </div>
+        </div>
+    </div>
+    <div class="horizontal-container">
+        <div class="vertical-container">
+            <h1>Alt</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="music-input"></span>
+            <button onclick="startMusicInterval()">Start</button>
+            <button onclick="stopMusicInterval()">STOPP!</button>
+        </div>
+        <div class="vertical-container">
+            <h1>Hihat</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="hihat-input"></span>
+            <button onclick="startHihatInterval()">Start</button>
+            <button onclick="stopHihatInterval()">STOPP!</button>
+        </div>
+        <div class="vertical-container">
+            <h1>Snare</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="snare-input"></span>
+            <button onclick="startSnareInterval()">Start</button>
+            <button onclick="stopSnareInterval()">STOPP!</button>
+        </div>
+        <div class="vertical-container">
+            <h1>Kick</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="kick-input"></span>
+            <button onclick="startKickInterval()">Start</button>
+            <button onclick="stopKickInterval()">STOPP!</button>
+        </div>
+        <div class="vertical-container">
+            <h1>Clap</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="clap-input"></span>
+            <button onclick="startClapInterval()">Start</button>
+            <button onclick="stopClapInterval()">STOPP!</button>
+        </div>
+        <div class="vertical-container">
+            <h1>Foley</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="foley-input"></span>
+            <button onclick="startFoleyInterval()">Start</button>
+            <button onclick="stopFoleyInterval()">STOPP!</button>
+        </div>
+        <div class="vertical-container">
+            <h1>Percussion</h1>
+            <span>Speed: <input type="number" min="100" value="250" max="2000" name="" id="percussion-input"></span>
+            <button onclick="startPercussionInterval()">Start</button>
+            <button onclick="stopPercussionInterval()">STOPP!</button>
+        </div>
+    </div>
+    </div>
+    <script src='main.js'></script>
+</body>
+
+</html>
